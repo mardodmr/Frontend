@@ -14,6 +14,30 @@ function UserInfo(props) {
   const [address, setAddress] = useState("");
   const navigate = useNavigate();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const userData = {
+      firstName,
+      lastName,
+      phone,
+      socials,
+      cashId,
+      governorate,
+      address,
+    };
+
+    if (props.submitButton === "save") {
+      console.log("this is the post method user_data", userData);
+      await createUserInfo(userData);
+      //disable all fields and navigate home
+      navigate("/", { replace: true });
+    } else {
+      await updateUserInfo(userData);
+      //disable all fields and navigate
+      navigate("/", { replace: true });
+    }
+  };
+
   useEffect(() => {
     async function fetchUserInfo() {
       const {
@@ -39,30 +63,6 @@ function UserInfo(props) {
       fetchUserInfo();
     }
   }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const userData = {
-      firstName,
-      lastName,
-      phone,
-      socials,
-      cashId,
-      governorate,
-      address,
-    };
-
-    if (props.submitButton === "save") {
-      console.log("this is the post method user_data", userData);
-      await createUserInfo(userData);
-      //disable all fields and navigate home
-      navigate("/", { replace: true });
-    } else {
-      await updateUserInfo(userData);
-      //disable all fields and navigate
-      navigate("/", { replace: true });
-    }
-  };
   return (
     <div className="user-info" style={{ padding: "20 px" }}>
       <form onSubmit={handleSubmit}>

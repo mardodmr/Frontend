@@ -52,6 +52,8 @@ export const AuthContextProvider = ({ children }) => {
     hasProducts,
     userLogOutLogic,
     login,
+    currentProductId,
+    setCurrentProductId,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

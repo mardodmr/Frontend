@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { getProduct, creatProduct, updateProduct } from "api/products";
 import "bootstrap/dist/css/bootstrap.css";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import { useAuth } from "context/auth-context";
 
 //TODO: upload images and protect this function
 
-function AddProduct() {
+function AddProduct(props) {
   const [name, setName] = useState("");
   const [description, setDesciption] = useState("");
   const [tags, setTags] = useState([""]);
@@ -83,7 +83,11 @@ function AddProduct() {
   return (
     <div className="add-item">
       <form onSubmit={handleSubmit}>
-        <h1>Add a product:</h1>
+        {props.button === "save" ? (
+          <h1>Add Product:</h1>
+        ) : (
+          <h1>Update Product:</h1>
+        )}
         <div className="mb-3">
           <label htmlFor="add-image" className="form=label">
             Add an image
@@ -148,7 +152,7 @@ function AddProduct() {
           <Form.Switch
             type="switch"
             id="custom-switch"
-            label="Check this switch"
+            label="In-Stock"
             onChange={(e) => setAvailability(e.target.checked)}
           />
         </div>
@@ -206,7 +210,7 @@ function AddProduct() {
         </div>
         <div>
           <button className="btn btn-primary" type="submit">
-            props.button
+            {props.button}
           </button>
         </div>
       </form>

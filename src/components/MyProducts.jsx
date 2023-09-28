@@ -20,7 +20,7 @@ function MyProducts() {
     }
     fetchProducts();
   }, []);
-  console.log(products);
+
   return (
     <div>
       {products?.map((product) => {

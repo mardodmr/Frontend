@@ -45,7 +45,7 @@ function NavbarComponent() {
                   title={`${userFullName.firstName} ${userFullName.lastName}`}
                   id="basic-nav-dropdown"
                 >
-                  <NavDropdown.Item href="/complete-profile">
+                  <NavDropdown.Item href="/edit-profile">
                     Edit Profile
                   </NavDropdown.Item>
                   <NavDropdown.Item href="/orders">My Orders</NavDropdown.Item>
