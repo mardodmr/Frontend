@@ -1,42 +1,76 @@
-import React, { useState } from "react";
-import users from "../api/users";
-import auth from "../api/auth";
+import React, { useEffect, useState } from "react";
+import { createUserInfo, updateUserInfo, getUserInfo } from "api/users";
+import { useNavigate } from "react-router-dom";
 
 //TODO: upload user image and protect this {never open anything unless user completes his profile}
 
-function UserInfo() {
+function UserInfo(props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
   const [socials, setSocials] = useState([""]); //form as set tags
   const [cashId, setCashId] = useState("");
   const [governorate, setGovernorate] = useState("");
   const [address, setAddress] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchUserInfo() {
+      const {
+        firstName,
+        lastName,
+        phone,
+        socials,
+        cashId,
+        address,
+        governorate,
+      } = await getUserInfo();
+      setFirstName(firstName);
+      setLastName(lastName);
+      setPhone(phone);
+      setSocials(socials);
+      setCashId(cashId);
+      setAddress(address);
+      setGovernorate(governorate);
+    }
+
+    if (props.submitButton === "update") {
+      console.log("i'm getting user info to display here");
+      fetchUserInfo();
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { _id: id } = auth.getCurrentUser();
     const userData = {
       firstName,
       lastName,
       phone,
-      email,
       socials,
       cashId,
       governorate,
       address,
-      userType: "regular",
-      userCredentials: id,
     };
 
-    await users.updateUserInfo(userData);
-    //run update query - user info
+    if (props.submitButton === "save") {
+      console.log("this is the post method user_data", userData);
+      await createUserInfo(userData);
+      //disable all fields and navigate home
+      navigate("/", { replace: true });
+    } else {
+      await updateUserInfo(userData);
+      //disable all fields and navigate
+      navigate("/", { replace: true });
+    }
   };
   return (
-    <div className="user-info">
+    <div className="user-info" style={{ padding: "20 px" }}>
       <form onSubmit={handleSubmit}>
-        <h1>User Info:</h1>
+        {props.submitButton === "save" ? (
+          <h1>Add your info:</h1>
+        ) : (
+          <h1>Update your info:</h1>
+        )}
         <div className="mb-3">
           <label htmlFor="first-name" className="form-label">
             First name
@@ -74,19 +108,6 @@ function UserInfo() {
             required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email address
-          </label>
-          <input
-            placeholder="Email"
-            id="email"
-            className="form-control"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -142,7 +163,9 @@ function UserInfo() {
             onChange={(e) => setAddress(e.target.value)}
           />
         </div>
-        <button className="btn btn-primary" type="submit">Update</button>
+        <button className="btn btn-primary" type="submit">
+          {props.submitButton}
+        </button>
       </form>
     </div>
   );

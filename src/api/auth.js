@@ -9,6 +9,7 @@ export const loginUser = async (userData) => {
     localStorage.setItem("token", jwt);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -20,10 +21,11 @@ export const logoutUser = () => {
 export const getCurrentUser = () => {
   try {
     const jwt = localStorage.getItem("token");
+    console.log(jwtDecode(jwt), "this is jwt");
     return jwtDecode(jwt);
   } catch (error) {
     return null;
   }
 };
 
-export default {getCurrentUser, logoutUser,loginUser}
+export default { getCurrentUser, logoutUser, loginUser };

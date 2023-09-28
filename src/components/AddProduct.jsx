@@ -1,6 +1,9 @@
 import React, { useState, useRef } from "react";
-import products from "../api/products";
-import 'bootstrap/dist/css/bootstrap.css';
+import { getProduct, creatProduct, updateProduct } from "api/products";
+import "bootstrap/dist/css/bootstrap.css";
+import { useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import { useAuth } from "context/auth-context";
 
 //TODO: upload images and protect this function
 
@@ -15,6 +18,8 @@ function AddProduct() {
   const [color, setColor] = useState("");
   const [isClothes, setIsClothes] = useState(false);
   const [disableInput, setDisableInput] = useState(true);
+  const navigate = useNavigate();
+  const { currentProductId } = useAuth();
 
   const handleChange = (e) => {
     setIsClothes(e.target.checked);
@@ -23,7 +28,7 @@ function AddProduct() {
   };
 
   const handleSubmit = async (e) => {
-    // const { _id: id } = await users.getUserInfo();
+    e.preventDefault();
     const productData = {
       name,
       description,
@@ -36,8 +41,44 @@ function AddProduct() {
       isClothes,
       // owner: id,
     };
-    await products.creatProduct(productData);
+    if (props.button === "add") {
+      await creatProduct(productData);
+      navigate("/products", { replace: true });
+    } else {
+      await updateProduct(currentProductId);
+      navigate("/products", { replace: true });
+    }
   };
+
+  useEffect(() => {
+    async function fetchProductInfo() {
+      const {
+        name,
+        description,
+        tags,
+        price,
+        isAvailable,
+        additionalNotes,
+        size,
+        color,
+        isClothes,
+      } = await getProduct(currentProductId);
+      setName(name);
+      setDesciption(description);
+      setTags(tags);
+      setPrice(price);
+      setAvailability(isAvailable);
+      setAdditionalNotes(additionalNotes);
+      setSize(size);
+      setColor(color);
+      setIsClothes(isClothes);
+    }
+
+    if (props.button === "update") {
+      console.log("i'm getting product info to display here");
+      fetchProductInfo();
+    }
+  }, []);
 
   return (
     <div className="add-item">
@@ -101,15 +142,14 @@ function AddProduct() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="abailability" className="form-label">
+          <label htmlFor="availability" className="form-label">
             Product availability
           </label>
-          <input
-            placeholder="Availability"
-            id="availability"
-            className="form-control"
-            value={isAvailable}
-            onChange={(e) => setAvailability(e.target.value)}
+          <Form.Switch
+            type="switch"
+            id="custom-switch"
+            label="Check this switch"
+            onChange={(e) => setAvailability(e.target.checked)}
           />
         </div>
         <div className="mb-3">
@@ -165,7 +205,9 @@ function AddProduct() {
           />
         </div>
         <div>
-          <button className="btn btn-primary" type="submit"></button>
+          <button className="btn btn-primary" type="submit">
+            props.button
+          </button>
         </div>
       </form>
     </div>

@@ -1,14 +1,15 @@
+import { useBanner } from "context/banner-context";
 import React, { useState } from "react";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 
 // onclick and lifting up the state
-function Categories() {
-  const [toggledTag, setToggledTag] = useState("");
-
-  const handleChange = ( newValue) => {
-    setToggledTag(newValue);
-    console.log(toggledTag, "123")
+function Categories({ tag, setTag }) {
+  const { setUserType } = useBanner();
+  const handleChange = (newValue) => {
+    setTag(newValue);
+    // console.log(newValue, "123");
+    setUserType("");
   };
 
   const categories = [
@@ -27,13 +28,17 @@ function Categories() {
       <ToggleButtonGroup
         type="radio"
         name="options"
-        //value={toggledTag}
+        value={tag}
         onChange={handleChange}
-        defaultValue={categories[0]}
+        // defaultValue={categories[0]}
       >
         {categories.map((category) => {
           return (
-            <ToggleButton  key= {category} id={`tbg-btn-${category}`} value={category}>
+            <ToggleButton
+              key={category}
+              id={`tbg-btn-${category}`}
+              value={category}
+            >
               {" "}
               {category}{" "}
             </ToggleButton>

@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { loginUser } from "api/auth";
+import { createUser } from "api/users";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import { useAuth } from "context/auth-context";
 
-function LogIn() {
+function LogIn(props) {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -12,17 +16,28 @@ function LogIn() {
   const handleClick = async (e) => {
     e.preventDefault();
     const credentials = { email, password };
-    try {
-      const match = await loginUser(credentials);
-      if(match) navigate("/shop");
-    } catch (error) {
-      console.log(error);
+    let match;
+
+    if (props.submitButton === "login") {
+      try {
+        match = await login(credentials);
+        navigate("/", { replace: true });
+      } catch (err) {
+        window.alert("Invalid Credentials");
+      }
+    } else {
+      await createUser(credentials);
+      navigate("/complete-profile", { replace: true });
     }
   };
 
   return (
     <div>
-      <h1>Log in with your credentials:</h1>
+      {props.submitButton === "login" ? (
+        <h1>Log in with your credentials:</h1>
+      ) : (
+        <h1>Create an account:</h1>
+      )}
       <FloatingLabel
         controlId="floatingInput"
         label="Email address"
@@ -45,9 +60,15 @@ function LogIn() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </FloatingLabel>
-      <button className="btn btn-primary" type="submit" onClick={handleClick}>
-        LOG IN
-      </button>
+      <Button
+        variant="primary"
+        size="lg"
+        className="btn btn-primary"
+        type="submit"
+        onClick={handleClick}
+      >
+        {props.submitButton}
+      </Button>
     </div>
   );
 }

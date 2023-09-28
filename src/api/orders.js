@@ -29,7 +29,7 @@ export const creatOrder = async (orderData) => {
 };
 
 // Update an order --> paid: true
-export const updateOrder = async (id) => {
+export const updateOrderPaid = async (id) => {
   try {
     const { data } = await axios.put(`${urlEndpoint}/paid/${id}`);
   } catch (error) {
@@ -56,7 +56,7 @@ export const deleteProduct = async (id) => {
 
 export default {
   deleteProduct,
-  updateOrder,
+  updateOrderPaid,
   updateOrderStatus,
   creatOrder,
   getOrdersOfMyProducts,

@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import AddCartItem from "components/cart/AddCartItem";
+import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
+import ListGroup from "react-bootstrap/ListGroup";
 
 function ProductCard(props) {
   //const {login credentials and userId} = useContext
@@ -17,39 +21,45 @@ function ProductCard(props) {
   } = props.data; // destructure orders data object from props
 
   const handleClick = (e) => {
-    setExpanded(!expanded);
     e.preventDefault();
+    setExpanded(!expanded);
   };
 
   return (
-    <div className="product-card" onClick={handleClick}>
-      {/* <img></img> */}
-      {expanded &&
-        <div>
-          <p>Product ID: {_id}</p>
-          <p>Owner: {owner}</p>
-        </div>
-      }
-      <h2>Name: {name}</h2>
-      {expanded && (
-        <p>
+    <Card style={{ width: "18rem" }}>
+      <Card.Img variant="top" src="holder.js/100px180" />
+      <Card.Body>
+        <Card.Title onClick={handleClick}>
+          {name}
+          <h6>
+            <Badge bg="secondary">Tags: {tags}</Badge>
+          </h6>
+        </Card.Title>
+        <Card.Text>
           <b>{description}</b>
-        </p>
+          <br />
+          Price: {`${price} `} Syrian Lira
+        </Card.Text>
+      </Card.Body>
+      {expanded && (
+        <ListGroup className="list-group-flush">
+          <ListGroup.Item>Product ID: {_id}</ListGroup.Item>
+          <ListGroup.Item>
+            Owner: {owner.firstName} {owner.lastName}
+          </ListGroup.Item>
+          {isClothes && (
+            <ListGroup.Item>
+              Size: {size} | Color: {color}
+            </ListGroup.Item>
+          )}
+        </ListGroup>
       )}
-      <p> Price: {price}Syrian Lira</p>
-      {expanded &&
-        <div>
-          <p>{tags}</p>
-          <p>In-stock: {isAvailable}</p>
-          {isClothes &&
-            <div className="clothing-item">
-              <p>Size: {size}</p>
-              <p>Color: {color}</p>
-            </div>
-          }
-        </div>
-      }
-    </div>
+      {props.cart === true && (
+        <Card.Body>
+          <AddCartItem data={{ _id, name, price /*img */ }} />
+        </Card.Body>
+      )}
+    </Card>
   );
 }
 
