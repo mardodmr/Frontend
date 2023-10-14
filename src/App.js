@@ -1,16 +1,16 @@
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import UserInfo from "components/UserInfo";
 import Home from "components/Home";
-import { ShopContextProvider } from "context/shop-context";
 import LogIn from "components/LogIn";
 import Orders from "components/Orders";
 import MyProducts from "components/MyProducts";
 import AddProduct from "components/AddProduct";
 import AboutUs from "components/AboutUs";
 import NavbarComponent from "components/NavbarComponent";
-import { AuthContextProvider } from "context/auth-context";
 import Cart from "components/cart/Cart";
+import { AuthContextProvider } from "context/auth-context";
+import { ShopContextProvider } from "context/shop-context";
+import "./App.css";
 
 function App() {
   return (

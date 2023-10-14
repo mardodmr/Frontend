@@ -45,6 +45,7 @@ function MyProducts() {
               </ListGroup>
               <Button
                 variant="primary"
+                style={{ margin: 10 }}
                 onClick={() => {
                   setCurrentProductId(product._id);
                   navigate("/update-product");

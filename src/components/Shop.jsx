@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import ProductCard from "components/ProductCard";
-import "styles/shop.css";
-import Button from "react-bootstrap/Button";
 import {
   getAllProducts,
   getProductsBasedOnTag,
   getProductsBasedOnUserType,
 } from "api/products";
-import Categories from "components/Categories";
 import { useBanner } from "context/banner-context";
+import ProductCard from "components/ProductCard";
+import Categories from "components/Categories";
+import "styles/shop.css";
 
 function Shop() {
   const [allProducts, setAllProducts] = React.useState([]);

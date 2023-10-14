@@ -1,5 +1,5 @@
+import React from "react";
 import { useBanner } from "context/banner-context";
-import React, { useState } from "react";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 
@@ -8,7 +8,6 @@ function Categories({ tag, setTag }) {
   const { setUserType } = useBanner();
   const handleChange = (newValue) => {
     setTag(newValue);
-    // console.log(newValue, "123");
     setUserType("");
   };
 

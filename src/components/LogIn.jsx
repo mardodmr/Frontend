@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
-import { loginUser } from "api/auth";
-import { createUser } from "api/users";
 import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import { createUser } from "api/users";
 import { useAuth } from "context/auth-context";
+import "styles/login.css";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 function LogIn(props) {
   const { login } = useAuth();
@@ -32,7 +32,7 @@ function LogIn(props) {
   };
 
   return (
-    <div>
+    <div className="login-form">
       {props.submitButton === "login" ? (
         <h1>Log in with your credentials:</h1>
       ) : (
@@ -66,6 +66,7 @@ function LogIn(props) {
         className="btn btn-primary"
         type="submit"
         onClick={handleClick}
+        style={{ margin: 20 }}
       >
         {props.submitButton}
       </Button>

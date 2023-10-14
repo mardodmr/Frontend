@@ -2,23 +2,28 @@ import React, { useState } from "react";
 import { useShop } from "context/shop-context";
 import { CartItem } from "components/cart/CartItem";
 import { useNavigate } from "react-router-dom";
-import "styles/cart.css";
 import Button from "react-bootstrap/Button";
+import Stack from "react-bootstrap/Stack";
 
 function Cart() {
   const [toggle, setToggle] = useState(false);
   const { cartItems, getTotalCartAmount, checkout } = useShop();
   const total = getTotalCartAmount();
-
   const navigate = useNavigate();
 
+  //checkout btn
+  const handleClick = async () => {
+    setToggle(!toggle);
+    await checkout();
+    navigate("/", { replace: true });
+  };
+
   return (
-    <div className="cart">
+    <div>
       <div>
-        <h1>Your Cart Items</h1>
+        <h1>Your Cart Items:</h1>
       </div>
-      <div className="cart">
-        {console.log("cart items", cartItems)}
+      <div className="product-card">
         {cartItems?.map((item) => {
           return <CartItem key={item._id} data={item} />;
         })}
@@ -26,19 +31,14 @@ function Cart() {
 
       {total > 0 ? (
         <div className="checkout">
-          <p> Total: ${total} </p>
-          <Button onClick={() => navigate("/")}> Continue Shopping </Button>
-          <Button
-            disabled={toggle}
-            onClick={async () => {
-              setToggle(!toggle);
-              await checkout();
-              navigate("/", { replace: true });
-            }}
-          >
-            {" "}
-            Place Order{" "}
-          </Button>
+          <h3> Total: ${total} </h3>
+          <Stack direction="horizontal" gap={2}>
+            <Button onClick={() => navigate("/")}> Continue Shopping </Button>
+            <Button disabled={toggle} onClick={handleClick}>
+              {" "}
+              Place Order{" "}
+            </Button>
+          </Stack>
         </div>
       ) : (
         <h1> Your Shopping Cart is Empty</h1>

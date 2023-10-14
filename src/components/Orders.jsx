@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import OrderCard from "components/OrderCard";
 import { getOrdersOfMyProducts, getOrdersIBought } from "api/orders";
+import { useAuth } from "context/auth-context";
+import OrderCard from "components/OrderCard";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import { useAuth } from "context/auth-context";
 
 function Orders() {
   //here i'll have four tabs that render conditionally //if the user owns products on click the query changes // renderButtons
@@ -17,7 +17,7 @@ function Orders() {
   //const [errorIsOpen, setErrorIsOpen] = useState(false); // TODO error handleing
   const renderOrders = () => {
     return orders?.map((order) => (
-      <div className="product-card">
+      <div>
         <OrderCard key={order._id} data={order} renderButtons={rednerBtn} />
       </div>
     ));
@@ -33,14 +33,17 @@ function Orders() {
       if (key === "processed") {
         const data = await getOrdersOfMyProducts("fulfilled");
         setOrders(data);
+        setRenderBtn(false);
       }
       if (key === "outgoing") {
         const data = await getOrdersIBought("pending");
         setOrders(data);
+        setRenderBtn(false);
       }
       if (key === "fulfilled") {
         const data = await getOrdersIBought("fulfilled");
         setOrders(data);
+        setRenderBtn(false);
       }
     }
     fetchOrders();
@@ -60,20 +63,20 @@ function Orders() {
       >
         {hasProducts && (
           <Tab eventKey="incoming" title="Incoming Orders">
-            {renderOrders()}
+            <div className="product-card">{renderOrders()}</div>
           </Tab>
         )}
         {hasProducts && (
           <Tab eventKey="processed" title="Processed Orders">
-            {renderOrders()}
+            <div className="product-card">{renderOrders()}</div>
           </Tab>
         )}
 
         <Tab eventKey="outgoing" title="Outgoing Orders">
-          {renderOrders()}
+          <div className="product-card">{renderOrders()}</div>
         </Tab>
         <Tab eventKey="fulfilled" title="Fulfilled Orders">
-          {renderOrders()}
+          <div className="product-card">{renderOrders()}</div>
         </Tab>
       </Tabs>
     </div>

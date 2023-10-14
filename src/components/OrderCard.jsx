@@ -34,30 +34,31 @@ function OrderCard(props) {
           <ListGroup.Item>Size: {size ? size : "N/A"}</ListGroup.Item>
           <ListGroup.Item>Color: {color ? color : "N/A"}</ListGroup.Item>
           <ListGroup.Item>
-            {user_id !== buyer._id ? (
-              <>
-                <p>Buyer Info:</p>
-                <p>
-                  full name: {buyer.firstName} {buyer.lastName}
-                </p>
-                <p>phone: {buyer.phone}</p>
-                <p>Syriatel cash id: {buyer.cashId}</p>
-              </>
-            ) : (
-              <>
+            {console.log("let's see ?", user_id, owner._id)}
+            {user_id === buyer._id ? (
+              <div>
                 <p>Owner Info:</p>
                 <p>
                   full name: {owner.firstName} {owner.lastName}
                 </p>
                 <p>phone: {owner.phone}</p>
                 <p>Syriatel cash id: {owner.cashId}</p>
-              </>
+              </div>
+            ) : (
+              <div>
+                <p>Buyer Info:</p>
+                <p>
+                  full name: {buyer.firstName} {buyer.lastName}
+                </p>
+                <p>phone: {buyer.phone}</p>
+                <p>Syriatel cash id: {buyer.cashId}</p>
+              </div>
             )}
           </ListGroup.Item>
           <ListGroup.Item>Total: {price}</ListGroup.Item>
         </ListGroup>
         {props.renderButtons && (
-          <div>
+          <div style={{ margin: 10 }}>
             <Button variant="primary" onClick={payClick}>
               Paid
             </Button>{" "}
