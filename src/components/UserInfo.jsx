@@ -1,3 +1,4 @@
+import "styles/userinfo.css";
 import React, { useEffect, useState } from "react";
 import { createUserInfo, updateUserInfo, getUserInfo } from "api/users";
 import { useNavigate } from "react-router-dom";
@@ -64,7 +65,7 @@ function UserInfo(props) {
     }
   }, []);
   return (
-    <div className="user-info" style={{ padding: "20 px" }}>
+    <div className="user-info">
       <form onSubmit={handleSubmit}>
         {props.submitButton === "save" ? (
           <h1>Add your info:</h1>

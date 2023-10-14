@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AddCartItem from "components/cart/AddCartItem";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
+import Stack from "react-bootstrap/Stack";
 
 function ProductCard(props) {
-  //const {login credentials and userId} = useContext
+  const width = 286;
+  const height = 180;
   const [expanded, setExpanded] = useState(false);
   const {
     _id,
@@ -18,6 +20,7 @@ function ProductCard(props) {
     size,
     color,
     owner,
+    productImg,
   } = props.data; // destructure orders data object from props
 
   const handleClick = (e) => {
@@ -27,13 +30,19 @@ function ProductCard(props) {
 
   return (
     <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
+      <Card.Img variant="top" width={width} height={height} src={productImg} />
       <Card.Body>
         <Card.Title onClick={handleClick}>
           {name}
-          <h6>
-            <Badge bg="secondary">Tags: {tags}</Badge>
-          </h6>
+          <Stack direction="horizontal" gap={2}>
+            {tags?.map((tag) => {
+              return (
+                <Badge pill bg="secondary">
+                  {tag}
+                </Badge>
+              );
+            })}
+          </Stack>
         </Card.Title>
         <Card.Text>
           <b>{description}</b>
@@ -56,7 +65,7 @@ function ProductCard(props) {
       )}
       {props.cart === true && (
         <Card.Body>
-          <AddCartItem data={{ _id, name, price /*img */ }} />
+          <AddCartItem data={{ _id, name, price, size, color }} />
         </Card.Body>
       )}
     </Card>

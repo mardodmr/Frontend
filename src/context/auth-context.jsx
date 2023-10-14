@@ -11,13 +11,15 @@ export const useAuth = () => {
 export const AuthContextProvider = ({ children }) => {
   const [currentProductId, setCurrentProductId] = useState("");
   const [userFullName, setUserFullName] = useState({});
-  const [hasProducts, setHasProducts] = useState("");
+  const [hasProducts, setHasProducts] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem("token") !== null ? true : false
   );
+  const [user_id, setUser_ID] = useState("");
 
   async function fetchUserInfo() {
-    const { firstName, lastName } = await getUserInfo();
+    const { firstName, lastName, _id } = await getUserInfo();
+    setUser_ID(_id);
     setUserFullName({ firstName, lastName });
     console.log("I'm in context", firstName, lastName);
   }

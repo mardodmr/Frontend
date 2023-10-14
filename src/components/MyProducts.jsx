@@ -22,12 +22,12 @@ function MyProducts() {
   }, []);
 
   return (
-    <div>
+    <div className="product-card">
       {products?.map((product) => {
         return (
           <div key={product._id}>
             <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+              <Card.Img variant="top" src={product.productImg} />
               <ListGroup className="list-group-flush">
                 {Object.keys(product).map((key) => {
                   if (!KEYS_TO_RENDER.includes(key)) {

@@ -11,43 +11,30 @@ import Categories from "components/Categories";
 import { useBanner } from "context/banner-context";
 
 function Shop() {
-  //doesn't matter if these two lines are inside the useEffect hook??
   const [allProducts, setAllProducts] = React.useState([]);
-  const [tagProducts, setTagProducts] = useState([]);
-  const [bannerProducts, setBannerProducts] = useState([]);
-  // const [products, setProducts] = useState([]);
   const [tag, setTag] = useState("ALL");
-  const [page, setPage] = useState(0);
   const { userType } = useBanner();
-
-  // const products = allProducts;
-  let products = [];
-  if (userType === "") {
-    products = allProducts;
-  }
-  console.log("Data", products);
 
   //useEffect
   useEffect(() => {
     async function fetchProducts() {
       // Filter based on user type
-      if (userType) {
-        const data = await getProductsBasedOnUserType(userType, page);
-        setBannerProducts([...bannerProducts, ...data]);
+      if (userType !== "") {
+        const data = await getProductsBasedOnUserType(userType);
+        setAllProducts(data);
         return;
       }
-
       // Filter based on Categories
       if (tag === "ALL") {
-        const data = await getAllProducts(page);
+        const data = await getAllProducts();
         setAllProducts(data);
       } else {
-        const data = await getProductsBasedOnTag(tag.toLowerCase(), page);
-        setTagProducts([...tagProducts, ...data]);
+        const data = await getProductsBasedOnTag(tag.toLowerCase());
+        setAllProducts(data);
       }
     }
     fetchProducts();
-  }, [tag, userType, page]);
+  }, [tag, userType]);
 
   //another useeffect
 
@@ -55,11 +42,11 @@ function Shop() {
     <div className="shop">
       <Categories tag={tag} setTag={setTag} />
       <div className="product-card">
-        {products.map((product) => {
+        {allProducts?.map((product) => {
           return <ProductCard key={product._id} data={product} cart={true} />;
         })}
       </div>
-      <Button onClick={(e) => setPage(page + 1)}>More...</Button>
+      {/* <Button onClick={(e) => setPage(page + 1)}>More...</Button> */}
     </div>
   );
 }

@@ -24,7 +24,7 @@ function Categories({ tag, setTag }) {
   ];
 
   return (
-    <div>
+    <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
       <ToggleButtonGroup
         type="radio"
         name="options"

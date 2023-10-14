@@ -11,44 +11,41 @@ import AboutUs from "components/AboutUs";
 import NavbarComponent from "components/NavbarComponent";
 import { AuthContextProvider } from "context/auth-context";
 import Cart from "components/cart/Cart";
-import { Button } from "react-bootstrap/Button";
 
 function App() {
   return (
     <div className="App">
       <AuthContextProvider>
         <ShopContextProvider>
-          <Router>
-            <NavbarComponent />
-            <Routes>
-              <Route path="/login" element={<LogIn submitButton={"login"} />} />
-              <Route
-                path="/register"
-                element={<LogIn submitButton={"register"} />}
-              />
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/" element={<Home />} />
-              <Route
-                path="/complete-profile"
-                element={<UserInfo submitButton={"save"} />}
-              />
-              <Route
-                path="/edit-profile"
-                element={<UserInfo submitButton={"update"} />}
-              />
-              <Route path="/products" element={<MyProducts />} />
-              <Route
-                path="/add-product"
-                element={<AddProduct button={"add"} />}
-              />
-              <Route
-                path="/update-product"
-                element={<AddProduct button={"update"} />}
-              />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/cart" element={<Cart />} />
-            </Routes>
-          </Router>
+          <NavbarComponent />
+          <Routes>
+            <Route path="/login" element={<LogIn submitButton={"login"} />} />
+            <Route
+              path="/register"
+              element={<LogIn submitButton={"register"} />}
+            />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/complete-profile"
+              element={<UserInfo submitButton={"save"} />}
+            />
+            <Route
+              path="/edit-profile"
+              element={<UserInfo submitButton={"update"} />}
+            />
+            <Route path="/products" element={<MyProducts />} />
+            <Route
+              path="/add-product"
+              element={<AddProduct button={"add"} />}
+            />
+            <Route
+              path="/update-product"
+              element={<AddProduct button={"update"} />}
+            />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
         </ShopContextProvider>
       </AuthContextProvider>
     </div>

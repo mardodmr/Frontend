@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import OrderCard from "components/OrderCard";
 import { getOrdersOfMyProducts, getOrdersIBought } from "api/orders";
-import { userHasProducts } from "api/users";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import NavbarComponent from "./NavbarComponent";
+import { useAuth } from "context/auth-context";
 
 function Orders() {
   //here i'll have four tabs that render conditionally //if the user owns products on click the query changes // renderButtons
@@ -12,20 +11,20 @@ function Orders() {
 
   const [orders, setOrders] = React.useState([]);
   const [rednerBtn, setRenderBtn] = useState(false);
-  const [key, setKey] = useState("");
-  const [hasProducts, setHasProducts] = useState(false);
+  const [key, setKey] = useState("outgoing");
+  const { hasProducts } = useAuth();
 
   //const [errorIsOpen, setErrorIsOpen] = useState(false); // TODO error handleing
   const renderOrders = () => {
-    return orders.map((order) => (
-      <OrderCard key={order._id} data={order} renderButtons={rednerBtn} />
+    return orders?.map((order) => (
+      <div className="product-card">
+        <OrderCard key={order._id} data={order} renderButtons={rednerBtn} />
+      </div>
     ));
   };
 
   useEffect(() => {
     async function fetchOrders() {
-      const has = await userHasProducts();
-      has ? setHasProducts(true) : setHasProducts(false);
       if (key === "incoming") {
         const data = await getOrdersOfMyProducts("pending");
         setOrders(data);
@@ -40,7 +39,7 @@ function Orders() {
         setOrders(data);
       }
       if (key === "fulfilled") {
-        const data = await getOrdersIBought(key);
+        const data = await getOrdersIBought("fulfilled");
         setOrders(data);
       }
     }
@@ -53,7 +52,10 @@ function Orders() {
       <Tabs
         id="controlled-tab-example"
         activeKey={key}
-        onSelect={(k) => setKey(k)}
+        onSelect={(k) => {
+          setKey(k);
+          console.log(k);
+        }}
         className="mb-3"
       >
         {hasProducts && (

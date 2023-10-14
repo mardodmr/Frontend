@@ -1,28 +1,18 @@
 import React from "react";
 import { useShop } from "context/shop-context";
+import orderPlaceHolder from "assets/products/cart-icon.jpg";
+import { Card } from "react-bootstrap";
 
 export const CartItem = (props) => {
-  const { id, productName, price, productImage } = props.data;
-  const { cartItems, addToCart, removeFromCart, updateCartItemCount } =
-    useShop();
+  const { _id, name, price } = props.data;
 
   return (
-    <div className="cartItem">
-      <img src={productImage} />
-      <div className="description">
-        <p>
-          <b>{productName}</b>
-        </p>
-        <p> Price: ${price}</p>
-        <div className="countHandler">
-          <button onClick={() => removeFromCart(id)}> - </button>
-          <input
-            value={cartItems[id]}
-            onChange={(e) => updateCartItemCount(Number(e.target.value), id)}
-          />
-          <button onClick={() => addToCart(id)}> + </button>
-        </div>
-      </div>
-    </div>
+    <Card className="bg-dark text-white">
+      <Card.Img src={orderPlaceHolder} alt="order image" height={230} />
+      <Card.Body>
+        <Card.Title>Product Name: {name}</Card.Title>
+        <Card.Text>Price: {price} Syrian Lira</Card.Text>
+      </Card.Body>
+    </Card>
   );
 };

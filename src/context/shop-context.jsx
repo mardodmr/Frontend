@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, useContext } from "react";
-import { PRODUCTS } from "../data/products";
+import { creatOrder } from "api/orders";
 
 export const ShopContext = createContext(null);
 
@@ -7,52 +7,38 @@ export const useShop = () => {
   return useContext(ShopContext);
 };
 
-const getDefaultCart = () => {
-  let cart = {};
-  for (let i = 1; i < PRODUCTS.length + 1; i++) {
-    cart[i] = 0;
-  }
-  return cart;
-};
-
 export const ShopContextProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(getDefaultCart());
+  const [cartItems, setCartItems] = useState([]);
 
   const getTotalCartAmount = () => {
-    let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemInfo = PRODUCTS.find((product) => product.id === Number(item));
-        totalAmount += cartItems[item] * itemInfo.price;
-      }
+    const sum = cartItems.reduce((accumulator, obj) => {
+      return accumulator + obj.price;
+    }, 0);
+    return sum;
+  };
+
+  const addToCart = (item) => {
+    console.log("I'm adding items to cart", item);
+
+    setCartItems([...cartItems, item]);
+  };
+
+  const removeFromCart = () => {};
+
+  const checkout = async () => {
+    for (let i = 0; i < cartItems.length; i++) {
+      await creatOrder(cartItems[i]);
     }
-    return totalAmount;
-  };
-
-  const addToCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-  };
-
-  const removeFromCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-  };
-
-  const updateCartItemCount = (newAmount, itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
-  };
-
-  const checkout = () => {
-    setCartItems(getDefaultCart());
   };
 
   const value = {
-    cartItems,
-    addToCart,
-    updateCartItemCount,
-    removeFromCart,
-    getTotalCartAmount,
-    checkout,
     useShop,
+    cartItems,
+    setCartItems,
+    getTotalCartAmount,
+    addToCart,
+    removeFromCart,
+    checkout,
   };
 
   return (

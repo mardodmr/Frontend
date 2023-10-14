@@ -2,11 +2,9 @@ import axios from "axios";
 
 const urlEndpoint = "http://localhost:3000/api/products";
 
-export const getProductsBasedOnTag = async (tag, page, onError) => {
+export const getProductsBasedOnTag = async (tag, onError) => {
   try {
-    const { data } = await axios.get(
-      `${urlEndpoint}/tags/${tag}/?page=${page}`
-    );
+    const { data } = await axios.get(`${urlEndpoint}/tags/${tag}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -14,20 +12,18 @@ export const getProductsBasedOnTag = async (tag, page, onError) => {
   }
 };
 
-export const getProductsBasedOnUserType = async (userType, page) => {
+export const getProductsBasedOnUserType = async (userType) => {
   try {
-    const { data } = await axios.get(
-      `${urlEndpoint}/${userType}/?page=${page}`
-    );
+    const { data } = await axios.get(`${urlEndpoint}/${userType}`);
     return data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getAllProducts = async (page) => {
+export const getAllProducts = async () => {
   try {
-    const { data } = await axios.get(`${urlEndpoint}/?page=${page}`);
+    const { data } = await axios.get(`${urlEndpoint}/`);
     return data;
   } catch (error) {
     console.log(error);

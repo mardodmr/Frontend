@@ -1,13 +1,14 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { useShop } from "context/shop-context";
-import { PRODUCTS } from "../../data/products";
 import { CartItem } from "components/cart/CartItem";
 import { useNavigate } from "react-router-dom";
 import "styles/cart.css";
+import Button from "react-bootstrap/Button";
 
 function Cart() {
+  const [toggle, setToggle] = useState(false);
   const { cartItems, getTotalCartAmount, checkout } = useShop();
-  const totalAmount = getTotalCartAmount();
+  const total = getTotalCartAmount();
 
   const navigate = useNavigate();
 
@@ -17,26 +18,27 @@ function Cart() {
         <h1>Your Cart Items</h1>
       </div>
       <div className="cart">
-        {PRODUCTS.map((product) => {
-          if (cartItems[product.id] !== 0) {
-            return <CartItem data={product} />;
-          }
+        {console.log("cart items", cartItems)}
+        {cartItems?.map((item) => {
+          return <CartItem key={item._id} data={item} />;
         })}
       </div>
 
-      {totalAmount > 0 ? (
+      {total > 0 ? (
         <div className="checkout">
-          <p> Subtotal: ${totalAmount} </p>
-          <button onClick={() => navigate("/")}> Continue Shopping </button>
-          <button
-            onClick={() => {
-              checkout();
-              navigate("/checkout");
+          <p> Total: ${total} </p>
+          <Button onClick={() => navigate("/")}> Continue Shopping </Button>
+          <Button
+            disabled={toggle}
+            onClick={async () => {
+              setToggle(!toggle);
+              await checkout();
+              navigate("/", { replace: true });
             }}
           >
             {" "}
-            Checkout{" "}
-          </button>
+            Place Order{" "}
+          </Button>
         </div>
       ) : (
         <h1> Your Shopping Cart is Empty</h1>
