@@ -32,12 +32,12 @@ function ProductCard(props) {
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" width={width} height={height} src={productImg} />
       <Card.Body>
-        <Card.Title onClick={handleClick}>
+        <Card.Title onClick={handleClick} style={{ cursor: "pointer" }}>
           {name}
           <Stack direction="horizontal" gap={2}>
             {tags?.map((tag) => {
               return (
-                <Badge pill bg="secondary">
+                <Badge style={{ fontSize: 12 }} pill bg="secondary">
                   {tag}
                 </Badge>
               );
@@ -47,7 +47,7 @@ function ProductCard(props) {
         <Card.Text>
           <b>{description}</b>
           <br />
-          Price: {`${price} `} Syrian Lira
+          Price: {`${price.toLocaleString()} `} Syrian Lira
         </Card.Text>
       </Card.Body>
       {expanded && (

@@ -34,7 +34,6 @@ function OrderCard(props) {
           <ListGroup.Item>Size: {size ? size : "N/A"}</ListGroup.Item>
           <ListGroup.Item>Color: {color ? color : "N/A"}</ListGroup.Item>
           <ListGroup.Item>
-            {console.log("let's see ?", user_id, owner._id)}
             {user_id === buyer._id ? (
               <div>
                 <p>Owner Info:</p>
@@ -55,7 +54,7 @@ function OrderCard(props) {
               </div>
             )}
           </ListGroup.Item>
-          <ListGroup.Item>Total: {price}</ListGroup.Item>
+          <ListGroup.Item>Total: {price.toLocaleString()}</ListGroup.Item>
         </ListGroup>
         {props.renderButtons && (
           <div style={{ margin: 10 }}>

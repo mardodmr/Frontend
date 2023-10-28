@@ -69,7 +69,8 @@ function NavbarComponent() {
                 <NavDropdown.Item>
                   <Link to="/orders">My Orders</Link>
                 </NavDropdown.Item>
-                {hasProducts && (
+                {console.log("no", hasProducts)}
+                {hasProducts > 0 && (
                   <NavDropdown.Item>
                     <>
                       <Link to="/products">My Products</Link>

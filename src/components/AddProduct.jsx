@@ -60,7 +60,7 @@ function AddProduct(props) {
     if (props.button === "add") {
       await creatProduct(productData);
       console.log("added");
-      //navigate("/products", { replace: true });
+      navigate("/products", { replace: true });
     } else {
       await updateProduct(currentProductId);
       navigate("/products", { replace: true });
@@ -187,7 +187,7 @@ function AddProduct(props) {
             onChange={(e) => setAvailability(e.target.checked)}
           />
         </div>
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label htmlFor="aditional-notes" className="form-label">
             Add additional notes?
           </label>
@@ -200,7 +200,7 @@ function AddProduct(props) {
             value={additionalNotes}
             onChange={(e) => setAdditionalNotes(e.target.value)}
           />
-        </div>
+        </div> */}
         <div className="form-check">
           <input
             className="form-check-input"

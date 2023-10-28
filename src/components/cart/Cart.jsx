@@ -31,7 +31,7 @@ function Cart() {
 
       {total > 0 ? (
         <div className="checkout">
-          <h3> Total: ${total} </h3>
+          <h3> Total: ${total.toLocaleString()} </h3>
           <Stack direction="horizontal" gap={2}>
             <Button onClick={() => navigate("/")}> Continue Shopping </Button>
             <Button disabled={toggle} onClick={handleClick}>

@@ -61,12 +61,12 @@ function Orders() {
         }}
         className="mb-3"
       >
-        {hasProducts && (
+        {hasProducts > 0 && (
           <Tab eventKey="incoming" title="Incoming Orders">
             <div className="product-card">{renderOrders()}</div>
           </Tab>
         )}
-        {hasProducts && (
+        {hasProducts > 0 && (
           <Tab eventKey="processed" title="Processed Orders">
             <div className="product-card">{renderOrders()}</div>
           </Tab>

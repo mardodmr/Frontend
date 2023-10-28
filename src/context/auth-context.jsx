@@ -11,7 +11,7 @@ export const useAuth = () => {
 export const AuthContextProvider = ({ children }) => {
   const [currentProductId, setCurrentProductId] = useState("");
   const [userFullName, setUserFullName] = useState({});
-  const [hasProducts, setHasProducts] = useState(false);
+  const [hasProducts, setHasProducts] = useState(0);
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem("token") !== null ? true : false
   );
@@ -25,7 +25,8 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   async function fetchUserHasProducts() {
-    setHasProducts(await userHasProducts());
+    const { numberOfProducts } = await userHasProducts();
+    setHasProducts(numberOfProducts);
   }
 
   function userLogOutLogic() {

@@ -10,7 +10,7 @@ export const CartItem = (props) => {
       <Card.Img src={orderPlaceHolder} alt="order image" height={230} />
       <Card.Body>
         <Card.Title>Product Name: {name}</Card.Title>
-        <Card.Text>Price: {price} Syrian Lira</Card.Text>
+        <Card.Text>Price: {price.toLocaleString()} Syrian Lira</Card.Text>
       </Card.Body>
     </Card>
   );
