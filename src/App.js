@@ -17,7 +17,6 @@ function App() {
     <div className="App">
       <AuthContextProvider>
         <ShopContextProvider>
-          <NavbarComponent />
           <Routes>
             <Route path="/login" element={<LogIn submitButton={"login"} />} />
             <Route

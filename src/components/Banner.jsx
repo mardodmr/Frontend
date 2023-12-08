@@ -32,6 +32,7 @@ function Banner({}) {
   return (
     <div
       style={{
+        // height: "30px",
         paddingLeft: 200,
         paddingRight: 200,
       }}
