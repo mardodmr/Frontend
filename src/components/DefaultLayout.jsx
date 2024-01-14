@@ -2,14 +2,14 @@ import React from "react";
 import NavbarComponent from "./NavbarComponent";
 import Footer from "./Footer";
 
-function AboutUs() {
+function DefaultLayout({ children }) {
   return (
-    <div>
+    <>
       <NavbarComponent />
-      <p>this is about us</p>
+      {children}
       <Footer />
-    </div>
+    </>
   );
 }
 
-export default AboutUs;
+export default DefaultLayout;

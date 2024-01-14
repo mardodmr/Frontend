@@ -1,13 +1,13 @@
-import React from "react";
 import { useBanner } from "context/banner-context";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import { Button, Flex, Show } from "@chakra-ui/react";
 
 // onclick and lifting up the state
-function Categories({ tag, setTag }) {
+function Categories({ setTag }) {
   const { setUserType } = useBanner();
-  const handleChange = (newValue) => {
-    setTag(newValue);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setTag(e.target.innerText);
     setUserType("");
   };
 
@@ -23,28 +23,30 @@ function Categories({ tag, setTag }) {
   ];
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
-      <ToggleButtonGroup
-        type="radio"
-        name="options"
-        value={tag}
-        onChange={handleChange}
-        // defaultValue={categories[0]}
+    <Show above="lg">
+      <Flex
+        minWidth="max-content"
+        justify={"center"}
+        bg={"black"}
+        marginBottom={"10"}
       >
-        {categories.map((category) => {
+        {categories.map((catergory) => {
           return (
-            <ToggleButton
-              key={category}
-              id={`tbg-btn-${category}`}
-              value={category}
+            <Button
+              key={catergory}
+              variant="solid"
+              color="white"
+              bg="black"
+              borderRadius={0}
+              onClick={handleClick}
             >
               {" "}
-              {category}{" "}
-            </ToggleButton>
+              {catergory}{" "}
+            </Button>
           );
         })}
-      </ToggleButtonGroup>
-    </div>
+      </Flex>
+    </Show>
   );
 }
 

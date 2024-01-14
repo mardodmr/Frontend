@@ -6,11 +6,9 @@ import Orders from "components/Orders";
 import MyProducts from "components/MyProducts";
 import AddProduct from "components/AddProduct";
 import AboutUs from "components/AboutUs";
-import NavbarComponent from "components/NavbarComponent";
 import Cart from "components/cart/Cart";
 import { AuthContextProvider } from "context/auth-context";
 import { ShopContextProvider } from "context/shop-context";
-import "./App.css";
 
 function App() {
   return (

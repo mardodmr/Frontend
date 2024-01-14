@@ -4,9 +4,11 @@ import { CartItem } from "components/cart/CartItem";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
+import { useAuth } from "context/auth-context";
 
 function Cart() {
   const [toggle, setToggle] = useState(false);
+  const { isAuthenticated } = useAuth();
   const { cartItems, getTotalCartAmount, checkout } = useShop();
   const total = getTotalCartAmount();
   const navigate = useNavigate();
@@ -14,8 +16,12 @@ function Cart() {
   //checkout btn
   const handleClick = async () => {
     setToggle(!toggle);
-    await checkout();
-    navigate("/", { replace: true });
+    if (isAuthenticated) {
+      await checkout();
+      navigate("/", { replace: true });
+    } else {
+      navigate("/login");
+    }
   };
 
   return (

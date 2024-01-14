@@ -7,14 +7,16 @@ import {
 import { useBanner } from "context/banner-context";
 import ProductCard from "components/ProductCard";
 import Categories from "components/Categories";
-import "styles/shop.css";
+import SidePanel from "components/SidePanel";
+import GridLayout from "components/GridLayout";
+import { Grid, GridItem, Show } from "@chakra-ui/react";
 
 function Shop() {
-  const [allProducts, setAllProducts] = React.useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [tag, setTag] = useState("ALL");
+  const [loading, setLoading] = useState(true);
   const { userType } = useBanner();
 
-  //useEffect
   useEffect(() => {
     async function fetchProducts() {
       // Filter based on user type
@@ -26,6 +28,7 @@ function Shop() {
       // Filter based on Categories
       if (tag === "ALL") {
         const data = await getAllProducts();
+        setLoading(false);
         setAllProducts(data);
       } else {
         const data = await getProductsBasedOnTag(tag.toLowerCase());
@@ -35,18 +38,26 @@ function Shop() {
     fetchProducts();
   }, [tag, userType]);
 
-  //another useeffect
-
   return (
-    <div className="shop">
+    <>
       <Categories tag={tag} setTag={setTag} />
-      <div className="product-card">
-        {allProducts?.map((product) => {
-          return <ProductCard key={product._id} data={product} cart={true} />;
-        })}
+      <div style={{ display: "flex" }}>
+        {/* <Grid width={"75%"} margin={"auto"} templateColumns="repeat (3, 1fr)">
+        <Show above="lg">
+      <GridItem colSpan={1} bg={"red"}> */}
+        <SidePanel />
+        {/* </GridItem> */}
+        {/* </Show> */}
+        {/* <GridItem colStart={2} colEnd={3}> */}
+        <GridLayout>
+          {allProducts?.map((product) => {
+            return <ProductCard key={product._id} data={product} cart={true} />;
+          })}
+        </GridLayout>
       </div>
-      {/* <Button onClick={(e) => setPage(page + 1)}>More...</Button> */}
-    </div>
+      {/* </GridItem> */}
+      {/* </Grid> */}
+    </>
   );
 }
 export default Shop;

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "context/auth-context";
 import { getMyProducts } from "api/products";
+import NavbarComponent from "components/NavbarComponent";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
-import { useAuth } from "context/auth-context";
-import { useNavigate } from "react-router-dom";
 
 const KEYS_TO_RENDER = ["name", "description", "price", "date"];
 
@@ -23,6 +24,7 @@ function MyProducts() {
 
   return (
     <div className="product-card">
+      <NavbarComponent />
       {products?.map((product) => {
         return (
           <div key={product._id}>
