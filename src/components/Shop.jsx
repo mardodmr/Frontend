@@ -1,62 +1,80 @@
-import React, { useEffect, useState } from "react";
-import {
-  getAllProducts,
-  getProductsBasedOnTag,
-  getProductsBasedOnUserType,
-} from "api/products";
-import { useBanner } from "context/banner-context";
-import ProductCard from "components/ProductCard";
-import Categories from "components/Categories";
-import SidePanel from "components/SidePanel";
+import { Show } from "@chakra-ui/react";
+import instance from "api/instance";
+import { CanceledError } from "axios";
 import GridLayout from "components/GridLayout";
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import ProductCard from "components/ProductCard";
+import SidePanel from "components/SidePanel";
+import { useEffect, useState } from "react";
+import useProductStore from "../stores/store";
 
 function Shop() {
-  const [allProducts, setAllProducts] = useState([]);
-  const [tag, setTag] = useState("ALL");
-  const [loading, setLoading] = useState(true);
-  const { userType } = useBanner();
+  const { userType, category, searchWord } = useProductStore();
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     async function fetchProducts() {
-      // Filter based on user type
-      if (userType !== "") {
-        const data = await getProductsBasedOnUserType(userType);
-        setAllProducts(data);
+      const controller = new AbortController();
+      //Search for a product name
+      if (searchWord) {
+        instance
+          .get(`/products/search/${searchWord}`, { signal: controller.signal })
+          .then((res) => setProducts(res.data))
+          .catch((err) => {
+            if (err instanceof CanceledError) return;
+            setError(err.message);
+          });
         return;
       }
-      // Filter based on Categories
-      if (tag === "ALL") {
-        const data = await getAllProducts();
-        setLoading(false);
-        setAllProducts(data);
-      } else {
-        const data = await getProductsBasedOnTag(tag.toLowerCase());
-        setAllProducts(data);
+
+      // Products based on user type
+      if (userType) {
+        instance
+          .get(`/products/${userType}`, { signal: controller.signal })
+          .then((res) => {
+            setProducts(res.data);
+          })
+          .catch((err) => {
+            if (err instanceof CanceledError) return;
+            setError(err.message);
+          });
+        return;
       }
+      // Products based on Categories
+      if (category === "new") {
+        instance
+          .get("/products", { signal: controller.signal })
+          .then((res) => setProducts(res.data))
+          .catch((err) => {
+            if (err instanceof CanceledError) return;
+            setError(err.message);
+          });
+      } else {
+        instance
+          .get(`/products/tags/${category}`, { signal: controller.signal })
+          .then((res) => setProducts(res.data))
+          .catch((err) => {
+            if (err instanceof CanceledError) return;
+            setError(err.message);
+          });
+      }
+      return () => controller.abort();
     }
     fetchProducts();
-  }, [tag, userType]);
+  }, [userType, category, searchWord]);
 
   return (
     <>
-      <Categories tag={tag} setTag={setTag} />
       <div style={{ display: "flex" }}>
-        {/* <Grid width={"75%"} margin={"auto"} templateColumns="repeat (3, 1fr)">
         <Show above="lg">
-      <GridItem colSpan={1} bg={"red"}> */}
-        <SidePanel />
-        {/* </GridItem> */}
-        {/* </Show> */}
-        {/* <GridItem colStart={2} colEnd={3}> */}
+          <SidePanel />
+        </Show>
         <GridLayout>
-          {allProducts?.map((product) => {
+          {products?.map((product) => {
             return <ProductCard key={product._id} data={product} cart={true} />;
           })}
         </GridLayout>
       </div>
-      {/* </GridItem> */}
-      {/* </Grid> */}
     </>
   );
 }

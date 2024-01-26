@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "context/auth-context";
 import { getProduct, creatProduct, updateProduct } from "api/products";
 import "bootstrap/dist/css/bootstrap.css";
-import "styles/addproduct.css";
 import CreatableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
 import Form from "react-bootstrap/Form";

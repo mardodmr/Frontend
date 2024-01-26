@@ -1,4 +1,3 @@
-import "styles/userinfo.css";
 import React, { useEffect, useState } from "react";
 import { createUserInfo, updateUserInfo, getUserInfo } from "api/users";
 import { useNavigate } from "react-router-dom";

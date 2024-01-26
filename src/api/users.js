@@ -15,7 +15,7 @@ export const userHasProducts = async () => {
 export const getUserInfo = async () => {
   try {
     const { data } = await axios.get(`${urlEndpoint}/me`);
-    console.log("i'm getting user info", data);
+    // console.log("i'm getting user info", data);
     return data;
   } catch (error) {
     console.log(error);

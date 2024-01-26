@@ -1,17 +1,23 @@
-import Shop from "components/Shop";
 import Banner from "components/Banner";
-import { BannerContextProvider } from "context/banner-context";
 import DefaultLayout from "./DefaultLayout";
 import MultiCarousel from "./MultiCarousel";
+import Categories from "./Categories";
+import useProductStore from "../stores/store";
+import Shop from "components/Shop";
 
 function Home() {
+  const { userType, category, searchWord } = useProductStore();
   return (
     <DefaultLayout>
-      <BannerContextProvider>
-        <Banner />
-        <MultiCarousel />
+      <Categories />
+      {userType || category || searchWord ? (
         <Shop />
-      </BannerContextProvider>
+      ) : (
+        <>
+          <Banner />
+          <MultiCarousel />
+        </>
+      )}
     </DefaultLayout>
   );
 }

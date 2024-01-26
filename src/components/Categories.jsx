@@ -1,47 +1,46 @@
-import { useBanner } from "context/banner-context";
 import { Button, Flex, Show } from "@chakra-ui/react";
+import useProductStore from "../stores/store";
 
 // onclick and lifting up the state
-function Categories({ setTag }) {
-  const { setUserType } = useBanner();
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    setTag(e.target.innerText);
-    setUserType("");
-  };
+function Categories() {
+  const { setCategory, setUserType, setSearch } = useProductStore();
 
   const categories = [
-    "ALL",
-    "PHONE CASES",
-    "JEWELRY",
-    "NECKLACE",
-    "CUSTOM GIFTS",
-    "ACCESSORIES",
-    "ART",
-    "BEAUTY",
+    { name: "NEW!", value: "new" },
+    { name: "PHONE CASES", value: "phone cases" },
+    { name: "JEWELRY", value: "jewelry" },
+    { name: "NECKLACE", value: "necklace" },
+    { name: "CUSTOM GIFTS", value: "custom gifts" },
+    { name: "ACCESSORIES", value: "accessories" },
+    { name: "ART", value: "art" },
+    { name: "BEAUTY", value: "beauty" },
   ];
 
   return (
     <Show above="lg">
       <Flex
+        height={"40px"}
         minWidth="max-content"
         justify={"center"}
         bg={"black"}
-        marginBottom={"10"}
       >
         {categories.map((catergory) => {
           return (
             <Button
-              key={catergory}
+              key={catergory.value}
               variant="solid"
               color="white"
               bg="black"
               borderRadius={0}
-              onClick={handleClick}
+              onClick={() => {
+                setCategory(catergory.value);
+                setSearch("");
+                setUserType("");
+              }}
+              fontSize={"sm"}
             >
               {" "}
-              {catergory}{" "}
+              {catergory.name}{" "}
             </Button>
           );
         })}

@@ -30,14 +30,14 @@ export const getAllProducts = async () => {
   }
 };
 
-export const getMiniProducts = async () => {
-  try {
-    const { data } = await axios.get(`${urlEndpoint}/mini`);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const getMiniProducts = async () => {
+//   try {
+//     const { data } = await axios.get(`${urlEndpoint}/mini`);
+//     return data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const getMyProducts = async () => {
   try {
@@ -88,5 +88,5 @@ export default {
   getProduct,
   getAllProducts,
   getProductsBasedOnTag,
-  getMiniProducts,
+  // getMiniProducts,
 };
