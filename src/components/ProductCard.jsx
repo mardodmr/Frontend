@@ -15,7 +15,7 @@ function ProductCard(props) {
   const { name, description, price, productImg } = props.data; // destructure orders data object from props
 
   return (
-    <Card borderRadius={0}>
+    <Card borderRadius={0} width={"250px"}>
       <AspectRatio ratio={16 / 9}>
         <Image src={productImg} />
       </AspectRatio>

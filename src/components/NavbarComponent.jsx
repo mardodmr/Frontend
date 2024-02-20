@@ -1,23 +1,16 @@
-import { Flex, Divider } from "@chakra-ui/react";
-import SeachNav from "components/SeachNav";
-import NavbarLinks from "./NavbarLinks";
-import NavbarIcons from "./NavbarIcons";
+import { Divider, Grid } from "@chakra-ui/react";
+import NavbarSearch from "components/NavbarSearch";
+import NavbarIcons from "components/NavbarIcons";
+import NavbarLinks from "components/NavbarLinks";
 
 function NavbarComponent() {
   return (
     <>
-      <Flex
-        marginLeft="25%"
-        marginRight="25%"
-        marginBottom={"1%"}
-        marginTop={"1%"}
-        justifyContent={"space-between"}
-        alignItems={"center"}
-      >
+      <Grid templateColumns="1.2fr 0.4fr 1fr">
         <NavbarLinks />
-        <SeachNav />
+        <NavbarSearch />
         <NavbarIcons />
-      </Flex>
+      </Grid>
       <Divider margin={0} />
     </>
   );

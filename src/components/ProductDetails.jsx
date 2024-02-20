@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "context/auth-context";
 import { getProduct, createProduct, updateProduct } from "api/products";
 import "bootstrap/dist/css/bootstrap.css";
@@ -10,7 +10,7 @@ import icon from "assets/products/product-icon.png";
 
 //TODO: upload images and protect this function
 
-function AddProduct(props) {
+function ProductDetails(props) {
   const [name, setName] = useState("");
   const [description, setDesciption] = useState("");
   const [tags, setTags] = useState([]);
@@ -35,8 +35,6 @@ function AddProduct(props) {
     { value: "beauty", label: "Beauty" },
   ];
 
-  const { state } = useLocation();
-  // console.log(state);
   const handleChange = (e) => {
     setIsClothes(e.target.checked);
     e.target.checked ? setDisableInput(false) : setDisableInput(true);
@@ -101,7 +99,7 @@ function AddProduct(props) {
   }, []);
 
   return (
-    <div style={{ padding: "0 10px 0 10px" }} className="add-item">
+    <div className="add-item">
       <form onSubmit={handleSubmit}>
         {props.button === "Save Changes" ? (
           <h1>Update Product:</h1>
@@ -188,7 +186,20 @@ function AddProduct(props) {
             onChange={(e) => setAvailability(e.target.checked)}
           />
         </div>
-
+        {/* <div className="mb-3">
+          <label htmlFor="aditional-notes" className="form-label">
+            Add additional notes?
+          </label>
+          <textarea
+            className="form-control"
+            id="aditional-notes"
+            required
+            rows={4}
+            cols={40}
+            value={additionalNotes}
+            onChange={(e) => setAdditionalNotes(e.target.value)}
+          />
+        </div> */}
         <div className="form-check">
           <input
             className="form-check-input"
@@ -237,4 +248,4 @@ function AddProduct(props) {
   );
 }
 
-export default AddProduct;
+export default ProductDetails;

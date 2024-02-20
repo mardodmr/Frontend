@@ -23,6 +23,7 @@ function Categories() {
         minWidth="max-content"
         justify={"center"}
         bg={"black"}
+        marginBottom={1}
       >
         {categories.map((catergory) => {
           return (

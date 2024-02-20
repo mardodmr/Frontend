@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { HStack, Image, Text, Button } from "@chakra-ui/react";
+import { Flex, Image, Text, Button } from "@chakra-ui/react";
 import icon from "../assets/website_logo.png";
 
 function NavbarLinks() {
   return (
-    <HStack spacing={"5%"}>
+    <Flex gap={"1rem"} align={"center"} justify={"flex-end"}>
       <Image src={icon} boxSize="80px" padding="10px" />
       <Text margin={0} fontSize="lg" color="black">
         Art·sy
@@ -19,7 +19,7 @@ function NavbarLinks() {
           ABOUT US
         </Button>
       </Link>
-    </HStack>
+    </Flex>
   );
 }
 

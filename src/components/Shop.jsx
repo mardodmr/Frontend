@@ -64,18 +64,23 @@ function Shop() {
   }, [userType, category, searchWord]);
 
   return (
-    <>
-      <div style={{ display: "flex" }}>
-        <Show above="lg">
-          <SidePanel />
-        </Show>
-        <GridLayout>
-          {products?.map((product) => {
-            return <ProductCard key={product._id} data={product} cart={true} />;
-          })}
-        </GridLayout>
-      </div>
-    </>
+    <div
+      style={{
+        width: "75%",
+        display: "flex",
+        gap: "1rem",
+        margin: "auto",
+      }}
+    >
+      <Show above="lg">
+        <SidePanel />
+      </Show>
+      <GridLayout>
+        {products?.map((product) => {
+          return <ProductCard key={product._id} data={product} cart={true} />;
+        })}
+      </GridLayout>
+    </div>
   );
 }
 export default Shop;

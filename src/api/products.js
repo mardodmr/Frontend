@@ -57,7 +57,7 @@ export const getProduct = async (id) => {
   }
 };
 
-export const creatProduct = async (productData) => {
+export const createProduct = async (productData) => {
   try {
     const { data } = await axios.post(`${urlEndpoint}/`, productData);
   } catch (error) {
@@ -84,7 +84,7 @@ export const deleteProduct = async (id) => {
 export default {
   deleteProduct,
   updateProduct,
-  creatProduct,
+  createProduct,
   getProduct,
   getAllProducts,
   getProductsBasedOnTag,

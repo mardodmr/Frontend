@@ -1,9 +1,10 @@
 import Banner from "components/Banner";
 import DefaultLayout from "./DefaultLayout";
-import MultiCarousel from "./MultiCarousel";
-import Categories from "./Categories";
-import useProductStore from "../stores/store";
+//import MultiCarousel from "./MultiCarousel";
 import Shop from "components/Shop";
+import useProductStore from "../stores/store";
+import Categories from "./Categories";
+import CustomCarousel from "./CustomCarousel";
 
 function Home() {
   const { userType, category, searchWord } = useProductStore();
@@ -15,7 +16,8 @@ function Home() {
       ) : (
         <>
           <Banner />
-          <MultiCarousel />
+          {/* <MultiCarousel /> */}
+          <CustomCarousel />
         </>
       )}
     </DefaultLayout>

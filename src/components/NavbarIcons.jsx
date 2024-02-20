@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "context/auth-context";
-import { IconButton, HStack } from "@chakra-ui/react";
+import { IconButton, Flex } from "@chakra-ui/react";
 import { CgShoppingCart } from "react-icons/cg";
 import NavbarMenu from "components/NavbarMenu";
 import PopoverMenu from "components/PopoverMenu";
@@ -10,15 +10,15 @@ function NavbarIcons() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <HStack spacing={"25%"}>
+    <Flex gap={"1rem"} align={"center"} justify={"flex-start"}>
       <Link>
         <IconButton icon={<CgHeart size={30} />} variant={"gohst"} />
       </Link>
-      {isAuthenticated ? <NavbarMenu /> : <PopoverMenu />}
+      <div>{isAuthenticated ? <NavbarMenu /> : <PopoverMenu />}</div>
       <Link to="/cart">
         <IconButton icon={<CgShoppingCart size={30} />} variant={"gohst"} />
       </Link>
-    </HStack>
+    </Flex>
   );
 }
 
