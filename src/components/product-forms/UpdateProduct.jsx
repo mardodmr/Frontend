@@ -20,7 +20,7 @@ function UpdateProduct() {
 
   useEffect(() => {
     getProduct(id).then((data) => setServerValues(data));
-  }, []);
+  }, [id]);
 
   return (
     <ProductFields

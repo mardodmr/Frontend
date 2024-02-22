@@ -1,4 +1,4 @@
-import GridLayout from "components/GridLayout";
+import GridLayout from "components/layouts/GridLayout";
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 
 function SideGridLayout(props) {

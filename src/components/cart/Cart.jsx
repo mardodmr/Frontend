@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { useShop } from "context/shop-context";
 import { CartItem } from "components/cart/CartItem";
-import { useNavigate } from "react-router-dom";
+import { useShop } from "context/shop-context";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
-import { useAuth } from "context/auth-context";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "zustand-stores/auth-store";
 
 function Cart() {
   const [toggle, setToggle] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuthStore();
   const { cartItems, getTotalCartAmount, checkout } = useShop();
   const total = getTotalCartAmount();
   const navigate = useNavigate();

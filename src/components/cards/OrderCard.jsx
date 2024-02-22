@@ -1,25 +1,19 @@
-import React from "react";
+import { updateOrderPaid, updateOrderStatus } from "api/orders";
+import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import { updateOrderPaid, updateOrderStatus } from "api/orders";
-import { useAuth } from "context/auth-context";
+import useAuthStore from "zustand-stores/auth-store";
 
 function OrderCard(props) {
   //after getting queried data along with additional props that determine the tab info to display in a card
   const { _id, date, price, size, color, productId, buyer, owner, quantity } =
     props.data;
-  const { user_id } = useAuth();
+  const { loadInitials, userInitials } = useAuthStore();
 
-  const payClick = async (e) => {
-    e.preventDefault();
-    await updateOrderPaid(_id);
-  };
-
-  const fulfillClick = async (e) => {
-    e.preventDefault();
-    await updateOrderStatus(_id);
-  };
+  useEffect(() => {
+    loadInitials();
+  }, []);
 
   return (
     <div style={{ width: "20rem" }}>
@@ -34,7 +28,7 @@ function OrderCard(props) {
           <ListGroup.Item>Size: {size ? size : "N/A"}</ListGroup.Item>
           <ListGroup.Item>Color: {color ? color : "N/A"}</ListGroup.Item>
           <ListGroup.Item>
-            {user_id === buyer._id ? (
+            {userInitials.user_id === buyer._id ? (
               <div>
                 <p>Owner Info:</p>
                 <p>
@@ -58,10 +52,16 @@ function OrderCard(props) {
         </ListGroup>
         {props.renderButtons && (
           <div style={{ margin: 10 }}>
-            <Button variant="primary" onClick={payClick}>
+            <Button
+              variant="primary"
+              onClick={async () => await updateOrderPaid(_id)}
+            >
               Paid
             </Button>{" "}
-            <Button variant="primary" onClick={fulfillClick}>
+            <Button
+              variant="primary"
+              onClick={async () => await updateOrderStatus(_id)}
+            >
               Fulfilled
             </Button>
           </div>

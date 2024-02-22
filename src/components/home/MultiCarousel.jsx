@@ -1,7 +1,7 @@
 import useData from "api/hooks/useData";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import ProductCard from "./ProductCard";
+import ProductCard from "../cards/ProductCard";
 
 function MultiCarousel() {
   const { products, error } = useData("/products");

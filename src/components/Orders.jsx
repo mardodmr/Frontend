@@ -1,9 +1,9 @@
+import { getOrdersIBought, getOrdersOfMyProducts } from "api/orders";
+import OrderCard from "components/cards/OrderCard";
 import React, { useEffect, useState } from "react";
-import { getOrdersOfMyProducts, getOrdersIBought } from "api/orders";
-import { useAuth } from "context/auth-context";
-import OrderCard from "components/OrderCard";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import useAuthStore from "zustand-stores/auth-store";
 
 function Orders() {
   //here i'll have four tabs that render conditionally //if the user owns products on click the query changes // renderButtons
@@ -12,7 +12,7 @@ function Orders() {
   const [orders, setOrders] = React.useState([]);
   const [rednerBtn, setRenderBtn] = useState(false);
   const [key, setKey] = useState("outgoing");
-  const { hasProducts } = useAuth();
+  const { productsNumber, hasProducts } = useAuthStore();
 
   //const [errorIsOpen, setErrorIsOpen] = useState(false); // TODO error handleing
   const renderOrders = () => {
@@ -46,6 +46,7 @@ function Orders() {
         setRenderBtn(false);
       }
     }
+    productsNumber();
     fetchOrders();
   }, [key]);
 

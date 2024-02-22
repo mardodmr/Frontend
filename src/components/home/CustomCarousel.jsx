@@ -1,5 +1,5 @@
 import useData from "api/hooks/useData";
-import ProductCard from "./ProductCard";
+import ProductCard from "../cards/ProductCard";
 import "components/custom-carousel.css";
 
 function CustomCarousel() {

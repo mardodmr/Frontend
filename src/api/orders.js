@@ -1,10 +1,12 @@
-import axios from "axios";
+import apiInstance from "./api-instance";
 
-const urlEndpoint = "http://localhost:3000/api/orders";
+const urlEndpoint = "/orders";
 
 export const getOrdersIBought = async (status) => {
   try {
-    const { data } = await axios.get(`${urlEndpoint}/purchased/${status}`);
+    const { data } = await apiInstance.get(
+      `${urlEndpoint}/purchased/${status}`
+    );
     return data;
   } catch (error) {
     console.log(error);
@@ -13,7 +15,7 @@ export const getOrdersIBought = async (status) => {
 
 export const getOrdersOfMyProducts = async (status) => {
   try {
-    const { data } = await axios.get(`${urlEndpoint}/process/${status}`);
+    const { data } = await apiInstance.get(`${urlEndpoint}/process/${status}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -22,7 +24,7 @@ export const getOrdersOfMyProducts = async (status) => {
 
 export const creatOrder = async (orderData) => {
   try {
-    const { data } = await axios.post(`${urlEndpoint}/`, orderData);
+    const { data } = await apiInstance.post(`${urlEndpoint}/`, orderData);
   } catch (error) {
     console.log(error);
   }
@@ -31,7 +33,7 @@ export const creatOrder = async (orderData) => {
 // Update an order --> paid: true
 export const updateOrderPaid = async (id) => {
   try {
-    const { data } = await axios.put(`${urlEndpoint}/paid/${id}`);
+    const { data } = await apiInstance.put(`${urlEndpoint}/paid/${id}`);
   } catch (error) {
     console.log(error);
   }
@@ -40,7 +42,7 @@ export const updateOrderPaid = async (id) => {
 // Update an order --> status: fulfilled / pending
 export const updateOrderStatus = async (id) => {
   try {
-    const { data } = await axios.put(`${urlEndpoint}/status/${id}`);
+    const { data } = await apiInstance.put(`${urlEndpoint}/status/${id}`);
   } catch (error) {
     console.log(error);
   }

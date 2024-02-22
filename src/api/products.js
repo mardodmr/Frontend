@@ -1,10 +1,10 @@
-import axios from "axios";
+import apiInstance from "./api-instance";
 
-const urlEndpoint = "http://localhost:3000/api/products";
+const urlEndpoint = "/products";
 
 export const getProductsBasedOnTag = async (tag, onError) => {
   try {
-    const { data } = await axios.get(`${urlEndpoint}/tags/${tag}`);
+    const { data } = await apiInstance.get(`${urlEndpoint}/tags/${tag}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -14,7 +14,7 @@ export const getProductsBasedOnTag = async (tag, onError) => {
 
 export const getProductsBasedOnUserType = async (userType) => {
   try {
-    const { data } = await axios.get(`${urlEndpoint}/${userType}`);
+    const { data } = await apiInstance.get(`${urlEndpoint}/${userType}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -23,7 +23,7 @@ export const getProductsBasedOnUserType = async (userType) => {
 
 export const getAllProducts = async () => {
   try {
-    const { data } = await axios.get(`${urlEndpoint}/`);
+    const { data } = await apiInstance.get(`${urlEndpoint}/`);
     return data;
   } catch (error) {
     console.log(error);
@@ -32,7 +32,7 @@ export const getAllProducts = async () => {
 
 // export const getMiniProducts = async () => {
 //   try {
-//     const { data } = await axios.get(`${urlEndpoint}/mini`);
+//     const { data } = await apiInstance.get(`${urlEndpoint}/mini`);
 //     return data;
 //   } catch (error) {
 //     console.log(error);
@@ -41,7 +41,7 @@ export const getAllProducts = async () => {
 
 export const getMyProducts = async () => {
   try {
-    const { data } = await axios.get(`${urlEndpoint}/myproducts`);
+    const { data } = await apiInstance.get(`${urlEndpoint}/myproducts`);
     return data;
   } catch (error) {
     console.log(error);
@@ -50,7 +50,7 @@ export const getMyProducts = async () => {
 
 export const getProduct = async (id) => {
   try {
-    const { data } = await axios.get(`${urlEndpoint}/id/${id}`);
+    const { data } = await apiInstance.get(`${urlEndpoint}/id/${id}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -59,7 +59,7 @@ export const getProduct = async (id) => {
 
 export const createProduct = async (productData) => {
   try {
-    const { data } = await axios.post(`${urlEndpoint}/`, productData);
+    const { data } = await apiInstance.post(`${urlEndpoint}/`, productData);
   } catch (error) {
     console.log(error);
   }
@@ -67,7 +67,7 @@ export const createProduct = async (productData) => {
 
 export const updateProduct = async (id, productData) => {
   try {
-    const { data } = await axios.put(`${urlEndpoint}/${id}`, productData);
+    const { data } = await apiInstance.put(`${urlEndpoint}/${id}`, productData);
   } catch (error) {
     console.log(error);
   }
@@ -75,7 +75,7 @@ export const updateProduct = async (id, productData) => {
 
 export const deleteProduct = async (id) => {
   try {
-    const { data } = await axios.delete(`${urlEndpoint}/${id}`);
+    const { data } = await apiInstance.delete(`${urlEndpoint}/${id}`);
   } catch (error) {
     console.log(error);
   }

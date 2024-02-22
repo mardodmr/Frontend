@@ -1,6 +1,6 @@
 import { Search2Icon } from "@chakra-ui/icons";
 import { Flex, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
-import useProductStore from "../stores/store";
+import useProductStore from "../../zustand-stores/filter-store";
 
 function NavbarSearch() {
   const { setCategory, setUserType, setSearch } = useProductStore();

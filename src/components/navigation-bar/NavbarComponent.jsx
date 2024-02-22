@@ -1,7 +1,7 @@
+import NavbarSearch from "components/navigation-bar/NavbarSearch";
+import NavbarIcons from "components/navigation-bar/NavbarIcons";
+import NavbarLinks from "components/navigation-bar/NavbarLinks";
 import { Divider, Grid } from "@chakra-ui/react";
-import NavbarSearch from "components/NavbarSearch";
-import NavbarIcons from "components/NavbarIcons";
-import NavbarLinks from "components/NavbarLinks";
 
 function NavbarComponent() {
   return (

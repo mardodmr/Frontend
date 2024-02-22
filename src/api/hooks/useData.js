@@ -1,4 +1,4 @@
-import instance from "api/instance";
+import apiInstance from "api/api-instance";
 import { CanceledError } from "axios";
 import { useEffect, useState } from "react";
 
@@ -8,7 +8,7 @@ const useData = (endpoint) => {
 
   useEffect(() => {
     const controller = new AbortController();
-    instance
+    apiInstance
       .get(endpoint, { signal: controller.signal })
       .then((res) => setProducts(res.data))
       .catch((err) => {

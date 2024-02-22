@@ -9,14 +9,14 @@ import {
 } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
 import { CgProfile } from "react-icons/cg";
-import { useAuth } from "context/auth-context";
+import useAuthStore from "zustand-stores/auth-store";
 
 function NavbarMenu() {
-  const { userLogOutLogic } = useAuth();
+  const { logoutUser } = useAuthStore();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    userLogOutLogic();
+    logoutUser();
     navigate("/", { replace: true });
   };
 

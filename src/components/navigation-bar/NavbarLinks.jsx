@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Flex, Image, Text, Button } from "@chakra-ui/react";
-import icon from "../assets/website_logo.png";
+import icon from "assets/website_logo.png";
 
 function NavbarLinks() {
   return (

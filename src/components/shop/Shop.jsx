@@ -1,11 +1,11 @@
 import { Show } from "@chakra-ui/react";
-import instance from "api/instance";
+import apiInstance from "api/api-instance";
 import { CanceledError } from "axios";
-import GridLayout from "components/GridLayout";
-import ProductCard from "components/ProductCard";
-import SidePanel from "components/SidePanel";
+import GridLayout from "components/layouts/GridLayout";
+import ProductCard from "components/cards/ProductCard";
+import SidePanel from "components/shop/SidePanel";
 import { useEffect, useState } from "react";
-import useProductStore from "../stores/store";
+import useProductStore from "../../zustand-stores/filter-store";
 
 function Shop() {
   const { userType, category, searchWord } = useProductStore();
@@ -17,7 +17,7 @@ function Shop() {
       const controller = new AbortController();
       //Search for a product name
       if (searchWord) {
-        instance
+        apiInstance
           .get(`/products/search/${searchWord}`, { signal: controller.signal })
           .then((res) => setProducts(res.data))
           .catch((err) => {
@@ -29,7 +29,7 @@ function Shop() {
 
       // Products based on user type
       if (userType) {
-        instance
+        apiInstance
           .get(`/products/${userType}`, { signal: controller.signal })
           .then((res) => {
             setProducts(res.data);
@@ -42,7 +42,7 @@ function Shop() {
       }
       // Products based on Categories
       if (category === "new") {
-        instance
+        apiInstance
           .get("/products", { signal: controller.signal })
           .then((res) => setProducts(res.data))
           .catch((err) => {
@@ -50,7 +50,7 @@ function Shop() {
             setError(err.message);
           });
       } else {
-        instance
+        apiInstance
           .get(`/products/tags/${category}`, { signal: controller.signal })
           .then((res) => setProducts(res.data))
           .catch((err) => {

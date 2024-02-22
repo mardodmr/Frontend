@@ -80,7 +80,6 @@ function ProductFields({
                 {({ field, form }) => {
                   return (
                     <Switch
-                      defaultChecked
                       onChange={(e) =>
                         form.setFieldValue(field.name, e.target.checked)
                       }
@@ -94,6 +93,7 @@ function ProductFields({
               <div>
                 <label htmlFor="size">Size:</label>
                 <Field type="number" name="size" />
+
                 <label htmlFor="color">Color:</label>
                 <Field type="text" name="color" />
               </div>

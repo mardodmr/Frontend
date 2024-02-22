@@ -1,8 +1,8 @@
-import Banner from "components/Banner";
-import DefaultLayout from "./DefaultLayout";
+import Banner from "components/home/Banner";
+import DefaultLayout from "../layouts/DefaultLayout";
 //import MultiCarousel from "./MultiCarousel";
-import Shop from "components/Shop";
-import useProductStore from "../stores/store";
+import Shop from "components/shop/Shop";
+import useProductStore from "../../zustand-stores/filter-store";
 import Categories from "./Categories";
 import CustomCarousel from "./CustomCarousel";
 

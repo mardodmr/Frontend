@@ -1,6 +1,5 @@
 import { Button } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
-import React from "react";
 
 function ProfileFields({
   loading,

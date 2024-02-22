@@ -1,5 +1,5 @@
 import { Button, Flex, Show } from "@chakra-ui/react";
-import useProductStore from "../stores/store";
+import useProductStore from "../../zustand-stores/filter-store";
 
 // onclick and lifting up the state
 function Categories() {

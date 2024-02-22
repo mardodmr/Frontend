@@ -1,11 +1,25 @@
-import axios from "axios";
+import apiInstance from "./api-instance";
 import jwtDecode from "jwt-decode";
 
-const urlEndpoint = "http://localhost:3000/api/auth";
+const urlEndpoint = "/auth";
 
+//Register email and password
+export const createUser = async (userData) => {
+  try {
+    const { data: jwt } = await apiInstance.post(
+      `${urlEndpoint}/credentials`,
+      userData
+    );
+    localStorage.setItem("token", jwt);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//Log in with email and password
 export const loginUser = async (userData) => {
   try {
-    const { data: jwt } = await axios.post(`${urlEndpoint}/`, userData); //email and pass
+    const { data: jwt } = await apiInstance.post(`${urlEndpoint}/`, userData); //email and pass
     localStorage.setItem("token", jwt);
   } catch (error) {
     console.log(error);
@@ -13,12 +27,8 @@ export const loginUser = async (userData) => {
   }
 };
 
-export const logoutUser = () => {
-  localStorage.removeItem("token");
-};
-
 // this returns an id of user credentials and not user data
-export const getCurrentUser = () => {
+export const getUserCredentialsId = () => {
   try {
     const jwt = localStorage.getItem("token");
     console.log(jwtDecode(jwt), "this is jwt");
@@ -28,4 +38,4 @@ export const getCurrentUser = () => {
   }
 };
 
-export default { getCurrentUser, logoutUser, loginUser };
+export default { getUserCredentialsId, createUser, loginUser };
