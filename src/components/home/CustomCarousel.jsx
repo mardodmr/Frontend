@@ -1,9 +1,9 @@
 import useData from "api/hooks/useData";
-import ProductCard from "../cards/ProductCard";
-import "components/custom-carousel.css";
+import ProductCard from "../products/ProductCard";
+import "style-sheets/custom-carousel.css";
 
 function CustomCarousel() {
-  const { products } = useData("/products");
+  const { data } = useData("/products");
 
   return (
     <div>
@@ -21,7 +21,7 @@ function CustomCarousel() {
           position: "relative",
         }}
       >
-        {products?.map((product) => {
+        {data?.map((product) => {
           return (
             <div
               key={product._id}

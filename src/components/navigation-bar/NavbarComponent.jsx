@@ -11,7 +11,7 @@ function NavbarComponent() {
         <NavbarSearch />
         <NavbarIcons />
       </Grid>
-      <Divider margin={0} />
+      <Divider margin={0} variant={"dashed"} />
     </>
   );
 }

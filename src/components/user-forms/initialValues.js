@@ -1,4 +1,4 @@
-export const initialValues = {
+const initialValues = {
   firstName: "",
   lastName: "",
   phone: "",
@@ -7,3 +7,5 @@ export const initialValues = {
   cashId: "",
   address: "",
 };
+
+export default initialValues;

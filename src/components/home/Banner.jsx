@@ -7,7 +7,7 @@ function Banner() {
   const { setUserType } = useProductStore();
   return (
     <Box paddingBottom="10" paddingTop="4">
-      <Carousel>
+      <Carousel pause={"hover"}>
         {bannerItems.map((item) => {
           return (
             <Carousel.Item
@@ -18,7 +18,7 @@ function Banner() {
               <AspectRatio ratio={4 / 1.1}>
                 <Image src={item.img} alt={item.userType} />
               </AspectRatio>
-              <Carousel.Caption>
+              <Carousel.Caption style={{ fontFamily: "avenir-next" }}>
                 <h1>{item.caption}</h1>
                 <h5>{item.subCaption}</h5>
               </Carousel.Caption>

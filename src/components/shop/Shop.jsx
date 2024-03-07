@@ -1,11 +1,11 @@
-import { Show } from "@chakra-ui/react";
-import apiInstance from "api/api-instance";
-import { CanceledError } from "axios";
-import GridLayout from "components/layouts/GridLayout";
-import ProductCard from "components/cards/ProductCard";
-import SidePanel from "components/shop/SidePanel";
 import { useEffect, useState } from "react";
+import { Show } from "@chakra-ui/react";
+import SidePanel from "components/shop/SidePanel";
+import GridLayout from "components/layouts/GridLayout";
+import ProductCard from "components/products/ProductCard";
+import apiInstance from "api/api-instance";
 import useProductStore from "../../zustand-stores/filter-store";
+import { CanceledError } from "axios";
 
 function Shop() {
   const { userType, category, searchWord } = useProductStore();

@@ -1,20 +1,17 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import ProductFields from "./ProductFields";
-import { initialValues } from "./constValues";
 import { getProduct, updateProduct } from "api/products";
+import FormStyleWrapper from "components/layouts/FormStyleWrapper";
+import { useEffect, useState } from "react";
+import ProductFields from "./ProductFields";
+import initialValues from "./initialValues";
 
-function UpdateProduct() {
+function UpdateProduct({ id }) {
   const [serverValues, setServerValues] = useState(initialValues);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const { state: id } = useLocation();
 
   const onSubmit = (values) => {
     setLoading(true);
     updateProduct(id, values).then(() => {
       setLoading(false);
-      navigate("/products", { replace: true });
     });
   };
 
@@ -23,12 +20,14 @@ function UpdateProduct() {
   }, [id]);
 
   return (
-    <ProductFields
-      loading={loading}
-      initialValues={serverValues}
-      onSubmit={onSubmit}
-      enableReinitialize={true}
-    />
+    <FormStyleWrapper>
+      <ProductFields
+        loading={loading}
+        initialValues={serverValues}
+        onSubmit={onSubmit}
+        enableReinitialize={true}
+      />
+    </FormStyleWrapper>
   );
 }
 

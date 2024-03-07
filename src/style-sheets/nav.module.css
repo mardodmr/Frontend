@@ -1,0 +1,14 @@
+.nav_link {
+  color: black;
+  font-size: medium;
+  width: 100%;
+}
+
+.nav_link:hover {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.nav_menu button:hover {
+  background-color: rgb(232, 232, 232);
+}

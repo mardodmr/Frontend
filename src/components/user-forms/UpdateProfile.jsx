@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { updateUserInfo, getUserInfo } from "api/users";
-import { initialValues } from "./initialValues";
+import initialValues from "./initialValues";
 import ProfileFields from "./ProfileFields";
+import FormStyleWrapper from "components/layouts/FormStyleWrapper";
 
-function CompleteProfile() {
+function UpdateProfile() {
   const [serverValues, setServerValues] = useState(initialValues);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -22,13 +23,15 @@ function CompleteProfile() {
   }, []);
 
   return (
-    <ProfileFields
-      loading={loading}
-      initialValues={serverValues}
-      onSubmit={onSubmit}
-      enableReinitialize={true}
-    />
+    <FormStyleWrapper>
+      <ProfileFields
+        loading={loading}
+        initialValues={serverValues}
+        onSubmit={onSubmit}
+        enableReinitialize={true}
+      />
+    </FormStyleWrapper>
   );
 }
 
-export default CompleteProfile;
+export default UpdateProfile;

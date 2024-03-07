@@ -1,0 +1,46 @@
+.table {
+  display: flex;
+  justify-content: center;
+}
+
+.table th {
+  border-bottom: 2px solid #000000 !important;
+  padding: 0 1rem 0 1rem;
+}
+.table tr {
+  height: 58px;
+}
+.table th,
+td {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+/* STYLE SECTION - styling table data elements */
+
+#description div {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#date {
+  width: 150px;
+}
+
+#icon {
+  width: 50px;
+}
+.table img {
+  margin: auto;
+}
+.table img:hover {
+  transform: scale(2.5);
+}
+
+#item div {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

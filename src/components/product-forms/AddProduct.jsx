@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createProduct } from "api/products";
 import ProductFields from "./ProductFields";
-import { initialValues } from "./constValues";
+import initialValues from "./initialValues";
+import FormStyleWrapper from "components/layouts/FormStyleWrapper";
 
 function AddProduct() {
   const [loading, setLoading] = useState(false);
@@ -18,11 +19,13 @@ function AddProduct() {
   };
 
   return (
-    <ProductFields
-      loading={loading}
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-    />
+    <FormStyleWrapper>
+      <ProductFields
+        loading={loading}
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+      />
+    </FormStyleWrapper>
   );
 }
 

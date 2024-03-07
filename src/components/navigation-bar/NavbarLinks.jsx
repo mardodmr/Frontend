@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Flex, Image, Text, Button } from "@chakra-ui/react";
+import { Flex, Image, Text } from "@chakra-ui/react";
+import css from "style-sheets/nav.module.css";
 import icon from "assets/website_logo.png";
 
 function NavbarLinks() {
@@ -10,14 +11,10 @@ function NavbarLinks() {
         Art·sy
       </Text>
       <Link to="/" reloadDocument>
-        <Button color={"black"} variant={"link"} width={"100%"}>
-          HOME
-        </Button>
+        <button className={css.nav_link}>HOME</button>
       </Link>
       <Link to="/about">
-        <Button color={"black"} variant={"link"} width={"100%"}>
-          ABOUT US
-        </Button>
+        <button className={css.nav_link}>ABOUT US</button>
       </Link>
     </Flex>
   );

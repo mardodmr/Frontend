@@ -1,10 +1,10 @@
 import useData from "api/hooks/useData";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import ProductCard from "../cards/ProductCard";
+import ProductCard from "../products/ProductCard";
 
 function MultiCarousel() {
-  const { products, error } = useData("/products");
+  const { data, error } = useData("/products");
 
   const responsive = {
     superLargeDesktop: {
@@ -46,7 +46,7 @@ function MultiCarousel() {
           removeArrowOnDeviceType={["tablet", "mobile"]}
           partialVisbile={true}
         >
-          {products?.map((product) => {
+          {data?.map((product) => {
             return (
               <div
                 key={product._id}

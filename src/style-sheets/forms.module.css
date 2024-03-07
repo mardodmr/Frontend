@@ -1,0 +1,17 @@
+.forms form div {
+  margin: 1rem 0 1rem 0;
+  font-size: large;
+}
+
+.forms form div input {
+  width: 100%;
+  padding: 7px;
+  padding-left: 15px;
+  border-radius: 10px;
+  border: 1px solid rgb(198, 198, 198);
+}
+
+.forms form div label {
+  margin-bottom: 10px;
+  font-weight: bold;
+}

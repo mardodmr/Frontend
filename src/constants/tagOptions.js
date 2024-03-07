@@ -1,16 +1,4 @@
-export const initialValues = {
-  name: "",
-  description: "",
-  tags: [],
-  price: "",
-  isAvailable: true,
-  size: "",
-  color: "",
-  isClothes: false,
-  productImg: "",
-};
-
-export const tagOptions = [
+const tagOptions = [
   { value: "phone case", label: "Phone Cases" },
   { value: "jewelry", label: "Jewelry" },
   { value: "necklace", label: "Necklace" },
@@ -19,3 +7,5 @@ export const tagOptions = [
   { value: "art", label: "Art" },
   { value: "beauty", label: "Beauty" },
 ];
+
+export default tagOptions;

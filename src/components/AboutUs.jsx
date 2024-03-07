@@ -1,14 +1,10 @@
-import React from "react";
-import NavbarComponent from "./navigation-bar/NavbarComponent";
-import Footer from "./footer/Footer";
+import DefaultLayout from "./layouts/DefaultLayout";
 
 function AboutUs() {
   return (
-    <div>
-      <NavbarComponent />
+    <DefaultLayout>
       <p>this is about us</p>
-      <Footer />
-    </div>
+    </DefaultLayout>
   );
 }
 

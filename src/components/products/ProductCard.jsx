@@ -23,7 +23,7 @@ function ProductCard(props) {
         <Heading size="md">{name}</Heading>
         <Text noOfLines={1}>{description}</Text>
         <Text color="blue.600" fontSize="md">
-          {`${price.toLocaleString()} Syrian Lira`}
+          {`${price.toLocaleString()} SYP`}
         </Text>
         <Divider />
         <ButtonGroup size="md" spacing="2">

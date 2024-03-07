@@ -2,7 +2,8 @@ import { Button, Switch } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
-import { tagOptions } from "./constValues";
+import tagOptions from "constants/tagOptions";
+import buttonStyle from "constants/chakraBlackButtonProps";
 
 function ProductFields({
   loading,
@@ -21,22 +22,23 @@ function ProductFields({
       {({ values }) => {
         return (
           <Form>
-            <h1>Product Details:</h1>
             <div>
-              <label htmlFor="productImg">Image URL:</label>
-              <Field type="text" name="productImg" />
-            </div>
-            <div>
-              <label htmlFor="name">Name:</label>
+              <label htmlFor="name">Name</label>
               <Field type="text" name="name" />
             </div>
             <div>
-              <label htmlFor="description">Description:</label>
+              <label htmlFor="description">Description</label>
               <Field type="text" name="description" />
             </div>
             <div>
-              <label htmlFor="tags">Tags:</label>
-              <Field name="tags">
+              <label htmlFor="productImg">Image Link</label>
+              <Field type="text" name="productImg" />
+            </div>
+            <div>
+              <label style={{ marginBottom: "0px" }} id="tags" htmlFor="tags">
+                Tags
+              </label>
+              <Field className="tags" name="tags">
                 {({ field, form }) => {
                   return (
                     <CreatableSelect
@@ -56,16 +58,18 @@ function ProductFields({
               </Field>
             </div>
             <div>
-              <label htmlFor="price">Price:</label>
+              <label htmlFor="price">Price</label>
               <Field type="text" name="price" />
             </div>
             <div>
-              <label htmlFor="availability">Available:</label>
-              <Field name="availability">
+              <label htmlFor="isAvailable">Available</label>
+              <Field name="isAvailable">
                 {({ field, form }) => {
                   return (
                     <Switch
-                      defaultChecked
+                      marginLeft={"10px"}
+                      marginTop={"5px"}
+                      isChecked={form.values.isAvailable}
                       onChange={(e) =>
                         form.setFieldValue(field.name, e.target.checked)
                       }
@@ -75,14 +79,17 @@ function ProductFields({
               </Field>
             </div>
             <div>
-              <label htmlFor="isClothes">Clothing Item:</label>
+              <label htmlFor="isClothes">Clothing Item</label>
               <Field name="isClothes">
                 {({ field, form }) => {
                   return (
                     <Switch
-                      onChange={(e) =>
-                        form.setFieldValue(field.name, e.target.checked)
-                      }
+                      marginLeft={"10px"}
+                      marginTop={"5px"}
+                      isChecked={form.values.isClothes}
+                      onChange={(e) => {
+                        form.setFieldValue(field.name, e.target.checked);
+                      }}
                     />
                   );
                 }}
@@ -90,24 +97,29 @@ function ProductFields({
             </div>
 
             {values.isClothes && (
-              <div>
-                <label htmlFor="size">Size:</label>
-                <Field type="number" name="size" />
-
-                <label htmlFor="color">Color:</label>
-                <Field type="text" name="color" />
-              </div>
+              <>
+                <div>
+                  <label htmlFor="size">Size</label>
+                  <Field type="text" name="size" />
+                </div>
+                <div>
+                  <label htmlFor="color">Color</label>
+                  <Field type="text" name="color" />
+                </div>
+              </>
             )}
-
-            <Button
-              type="submit"
-              isLoading={loading}
-              loadingText="Saving..."
-              colorScheme="teal"
-              variant="outline"
+            <div
+              style={{ margin: 0, display: "flex", justifyContent: "center" }}
             >
-              Save Changes
-            </Button>
+              <Button
+                type="submit"
+                isLoading={loading}
+                loadingText="Saving..."
+                {...buttonStyle}
+              >
+                Save Changes
+              </Button>
+            </div>
           </Form>
         );
       }}

@@ -1,10 +1,9 @@
-import Banner from "components/home/Banner";
-import DefaultLayout from "../layouts/DefaultLayout";
-//import MultiCarousel from "./MultiCarousel";
 import Shop from "components/shop/Shop";
-import useProductStore from "../../zustand-stores/filter-store";
+import Banner from "components/home/Banner";
 import Categories from "./Categories";
+import DefaultLayout from "../layouts/DefaultLayout";
 import CustomCarousel from "./CustomCarousel";
+import useProductStore from "../../zustand-stores/filter-store";
 
 function Home() {
   const { userType, category, searchWord } = useProductStore();
@@ -16,7 +15,6 @@ function Home() {
       ) : (
         <>
           <Banner />
-          {/* <MultiCarousel /> */}
           <CustomCarousel />
         </>
       )}

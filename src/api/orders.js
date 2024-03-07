@@ -2,6 +2,8 @@ import apiInstance from "./api-instance";
 
 const urlEndpoint = "/orders";
 
+//pending //fulfilled
+
 export const getOrdersIBought = async (status) => {
   try {
     const { data } = await apiInstance.get(

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { IconButton, Flex } from "@chakra-ui/react";
-import { CgShoppingCart } from "react-icons/cg";
 import NavbarMenu from "components/navigation-bar/NavbarMenu";
 import PopoverMenu from "components/navigation-bar/PopoverMenu";
+import { IconButton, Flex } from "@chakra-ui/react";
+import { CgShoppingCart } from "react-icons/cg";
 import { CgHeart } from "react-icons/cg";
 import useAuthStore from "zustand-stores/auth-store";
 

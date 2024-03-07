@@ -10,6 +10,10 @@ import {
 import { IconButton } from "@chakra-ui/react";
 import { CgProfile } from "react-icons/cg";
 import useAuthStore from "zustand-stores/auth-store";
+import ReusableModal from "components/reusable-components/ReusableModal";
+import title from "constants/profileElement";
+import UpdateProfile from "components/user-forms/UpdateProfile";
+import css from "style-sheets/nav.module.css";
 
 function NavbarMenu() {
   const { logoutUser } = useAuthStore();
@@ -27,12 +31,16 @@ function NavbarMenu() {
         icon={<CgProfile size={30} />}
         variant={"gohst"}
       />
-      <MenuList>
-        <MenuItem onClick={() => navigate("/edit-profile")}>
-          My Profile
+      <MenuList className={css.nav_menu}>
+        <MenuItem>
+          <ReusableModal
+            trigger={"Profile"}
+            title={title}
+            children={<UpdateProfile />}
+          />
         </MenuItem>
-        <MenuItem onClick={() => navigate("/orders")}>My Orders</MenuItem>
-        <MenuItem onClick={() => navigate("/products")}>My Products</MenuItem>
+        <MenuItem onClick={() => navigate("/orders")}>Orders</MenuItem>
+        <MenuItem onClick={() => navigate("/products")}>Products</MenuItem>
         <MenuDivider />
         <MenuItem onClick={handleLogout}>Log Out</MenuItem>
       </MenuList>

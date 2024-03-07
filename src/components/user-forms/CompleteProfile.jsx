@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserInfo } from "api/users";
 import ProfileFields from "./ProfileFields";
-import { initialValues } from "./initialValues";
+import initialValues from "./initialValues";
+import FormStyleWrapper from "components/layouts/FormStyleWrapper";
 
 function CompleteProfile() {
   const [loading, setLoading] = useState(false);
@@ -17,11 +18,13 @@ function CompleteProfile() {
   };
 
   return (
-    <ProfileFields
-      loading={loading}
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-    />
+    <FormStyleWrapper>
+      <ProfileFields
+        loading={loading}
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+      />
+    </FormStyleWrapper>
   );
 }
 
