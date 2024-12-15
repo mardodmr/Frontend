@@ -8,14 +8,14 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-function ReusableModal({ trigger, title, children }) {
+function ReusableModal({ modalSize, trigger, title, children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <div style={{ width: "100%" }} onClick={onOpen}>
         {trigger}
       </div>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size={modalSize}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader paddingBottom={0}>{title}</ModalHeader>

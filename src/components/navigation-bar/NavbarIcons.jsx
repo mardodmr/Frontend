@@ -1,22 +1,26 @@
-import { Link } from "react-router-dom";
+import { Flex, IconButton } from "@chakra-ui/react";
 import NavbarMenu from "components/navigation-bar/NavbarMenu";
 import PopoverMenu from "components/navigation-bar/PopoverMenu";
-import { IconButton, Flex } from "@chakra-ui/react";
-import { CgShoppingCart } from "react-icons/cg";
-import { CgHeart } from "react-icons/cg";
+import { useEffect } from "react";
+import { Heart, ShoppingCart } from "react-feather";
+import { Link } from "react-router-dom";
 import useAuthStore from "zustand-stores/auth-store";
 
 function NavbarIcons() {
-  const { isAuthenticated } = useAuthStore();
+  const { checkAuth, isAuthenticated } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   return (
     <Flex gap={"1rem"} align={"center"} justify={"flex-start"}>
       <Link>
-        <IconButton icon={<CgHeart size={30} />} variant={"gohst"} />
+        <IconButton icon={<Heart size={27} />} variant={"gohst"} />
       </Link>
       <div>{isAuthenticated ? <NavbarMenu /> : <PopoverMenu />}</div>
       <Link to="/cart">
-        <IconButton icon={<CgShoppingCart size={30} />} variant={"gohst"} />
+        <IconButton icon={<ShoppingCart size={25} />} variant={"gohst"} />
       </Link>
     </Flex>
   );

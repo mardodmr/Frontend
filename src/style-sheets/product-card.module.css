@@ -1,0 +1,34 @@
+.card {
+  width: auto;
+  height: 278px;
+  h6 {
+    margin: 8px 0 5px 0;
+    font-weight: 600;
+  }
+  p {
+    margin: 0;
+    font-weight: 700;
+  }
+  img {
+    height: 274.425px;
+    width: 245.387px;
+    object-fit: cover;
+  }
+}
+
+.card:hover {
+  h6,
+  #desc {
+    text-decoration: underline;
+  }
+}
+
+#desc {
+  width: 210px;
+  font-size: 14px;
+  font-weight: 100;
+  color: rgb(136, 136, 136);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

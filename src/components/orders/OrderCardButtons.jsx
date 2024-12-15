@@ -14,7 +14,6 @@ function OrderCardButtons({ state }) {
       <Button
         {...buttonStyle}
         size={"sm"}
-        borderRadius={0}
         isDisabled={paid || disablePaid}
         isLoading={loadingPaid}
         onClick={() => {
@@ -29,7 +28,6 @@ function OrderCardButtons({ state }) {
       </Button>{" "}
       <Button
         {...buttonStyle}
-        borderRadius={0}
         size={"sm"}
         isDisabled={status === "fulfilled" || disableFulfill}
         isLoading={loadingFulfill}

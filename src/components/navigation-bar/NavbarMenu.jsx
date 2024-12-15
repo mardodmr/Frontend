@@ -1,36 +1,32 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
 import {
+  IconButton,
   Menu,
   MenuButton,
-  MenuList,
-  MenuItem,
   MenuDivider,
+  MenuItem,
+  MenuList,
 } from "@chakra-ui/react";
-import { IconButton } from "@chakra-ui/react";
-import { CgProfile } from "react-icons/cg";
-import useAuthStore from "zustand-stores/auth-store";
+import UpdateProfile from "components/forms/user-forms/UpdateProfile";
 import ReusableModal from "components/reusable-components/ReusableModal";
 import title from "constants/profileElement";
-import UpdateProfile from "components/user-forms/UpdateProfile";
+import { User } from "react-feather";
+import { useNavigate } from "react-router-dom";
 import css from "style-sheets/nav.module.css";
+import useAuthStore from "zustand-stores/auth-store";
 
 function NavbarMenu() {
-  const { logoutUser } = useAuthStore();
+  const { logoutUser, checkAuth } = useAuthStore();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logoutUser();
+    checkAuth();
     navigate("/", { replace: true });
   };
 
   return (
     <Menu>
-      <MenuButton
-        as={IconButton}
-        icon={<CgProfile size={30} />}
-        variant={"gohst"}
-      />
+      <MenuButton as={IconButton} icon={<User size={30} />} variant={"gohst"} />
       <MenuList className={css.nav_menu}>
         <MenuItem>
           <ReusableModal

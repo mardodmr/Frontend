@@ -6,6 +6,8 @@ import ProductCard from "components/products/ProductCard";
 import apiInstance from "api/api-instance";
 import useProductStore from "../../zustand-stores/filter-store";
 import { CanceledError } from "axios";
+import ReusableModal from "components/reusable-components/ReusableModal";
+import ProductExpansion from "components/products/product-modal/ProductExpansion";
 
 function Shop() {
   const { userType, category, searchWord } = useProductStore();
@@ -77,7 +79,14 @@ function Shop() {
       </Show>
       <GridLayout>
         {products?.map((product) => {
-          return <ProductCard key={product._id} data={product} cart={true} />;
+          return (
+            <ReusableModal
+              modalSize={"xl"}
+              key={product._id}
+              children={<ProductExpansion />}
+              trigger={<ProductCard data={product} cart={true} />}
+            />
+          );
         })}
       </GridLayout>
     </div>

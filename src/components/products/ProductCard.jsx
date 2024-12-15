@@ -1,41 +1,17 @@
-import {
-  Card,
-  ButtonGroup,
-  Divider,
-  Text,
-  Heading,
-  CardBody,
-  Image,
-  Button,
-  AspectRatio,
-} from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import css from "style-sheets/product-card.module.css";
 
 function ProductCard(props) {
   const { name, description, price, productImg } = props.data; // destructure orders data object from props
 
   return (
-    <Card borderRadius={0} width={"250px"}>
-      <AspectRatio ratio={16 / 9}>
-        <Image src={productImg} />
-      </AspectRatio>
-      <CardBody>
-        <Heading size="md">{name}</Heading>
-        <Text noOfLines={1}>{description}</Text>
-        <Text color="blue.600" fontSize="md">
-          {`${price.toLocaleString()} SYP`}
-        </Text>
-        <Divider />
-        <ButtonGroup size="md" spacing="2">
-          <Button variant="solid" color="white" bg="black" borderRadius={0}>
-            Buy now
-          </Button>
-          <Button borderRadius={0} leftIcon={<AddIcon />}>
-            Wishlist
-          </Button>
-        </ButtonGroup>
-      </CardBody>
-    </Card>
+    <div className={css.card}>
+      <div>
+        <img src={productImg} />
+      </div>
+      <h6>{name}</h6>
+      <p id={css.desc}>{description}</p>
+      <p>{`${price.toLocaleString()} SYP`}</p>
+    </div>
   );
 }
 

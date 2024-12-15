@@ -2,13 +2,19 @@ import { create } from "zustand";
 import { getUserInfo, userHasProducts } from "api/users";
 
 const useAuthStore = create((set) => ({
-  isAuthenticated: localStorage.getItem("token") !== null ? true : false,
+  isAuthenticated: null,
   userInitials: {
     firstName: "",
     lastName: "",
     user_id: "",
   },
   hasProducts: 0,
+
+  checkAuth: () => {
+    set({
+      isAuthenticated: localStorage.getItem("token") !== null ? true : false,
+    });
+  },
 
   loadInitials: async () => {
     const { firstName, lastName, _id } = await getUserInfo();

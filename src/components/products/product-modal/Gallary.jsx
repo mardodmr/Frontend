@@ -1,6 +1,5 @@
 import ImageGallery from "react-image-gallery";
-
-import React from "react";
+import "react-image-gallery/styles/css/image-gallery.css";
 
 const images = [
   {
@@ -18,7 +17,7 @@ const images = [
 ];
 function Gallary() {
   return (
-    <div style={{ width: "300px" }}>
+    <div>
       <ImageGallery items={images} />
     </div>
   );

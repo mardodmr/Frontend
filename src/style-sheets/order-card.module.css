@@ -1,6 +1,6 @@
 .card {
   width: 50%;
-  border: 1px solid #ddd;
+  border: 2px solid #000000;
   padding: 1rem;
   margin-bottom: 1rem;
 }
@@ -14,13 +14,13 @@
 .head {
   display: flex;
   gap: 1rem;
-  border-bottom: 2px solid #000000;
+  border-bottom: 1px solid #a0a0a0;
 }
 
 .body {
   display: flex;
   justify-content: space-between;
-  border-bottom: 2px solid #ababab;
+  border-bottom: 1px solid #d4d4d4;
   div {
     width: 50%;
     padding: 0.5rem 0 0.5rem 0;

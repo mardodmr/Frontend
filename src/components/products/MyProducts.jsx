@@ -1,13 +1,13 @@
 import { AddIcon, EditIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
-import ReusableModal from "../reusable-components/ReusableModal";
-import DefaultLayout from "../layouts/DefaultLayout";
-import UpdateProduct from "../product-forms/UpdateProduct";
-import TableSkeleton from "../skeletons/TableSkeleton";
-import AddProduct from "../product-forms/AddProduct";
+import useData from "api/hooks/useData";
 import title from "constants/productElement";
 import css from "style-sheets/table.module.css";
-import useData from "api/hooks/useData";
+import AddProduct from "../forms/product-forms/AddProduct";
+import UpdateProduct from "../forms/product-forms/UpdateProduct";
+import DefaultLayout from "../layouts/DefaultLayout";
+import ReusableModal from "../reusable-components/ReusableModal";
+import TableSkeleton from "../skeletons/TableSkeleton";
 
 function MyProducts() {
   const { data, error, loading } = useData("/products/myproducts");

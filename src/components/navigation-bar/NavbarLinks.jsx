@@ -7,8 +7,10 @@ function NavbarLinks() {
   return (
     <Flex gap={"1rem"} align={"center"} justify={"flex-end"}>
       <Image src={icon} boxSize="80px" padding="10px" />
-      <Text margin={0} fontSize="lg" color="black">
-        Art·sy
+      <Text letterSpacing={"3px"} margin={0} fontSize="lg" color="black">
+        ART
+        <span style={{ fontWeight: "bold" }}>·</span>
+        SY
       </Text>
       <Link to="/" reloadDocument>
         <button className={css.nav_link}>HOME</button>

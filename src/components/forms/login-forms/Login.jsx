@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginFields from "components/login-forms/LoginFields";
+import LoginFields from "components/forms/login-forms/LoginFields";
 import { loginUser } from "api/auth";
 
 function Login() {

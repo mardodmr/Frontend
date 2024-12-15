@@ -1,0 +1,15 @@
+.carousel {
+  border: 1px solid black;
+  display: flex;
+  gap: 1rem;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  width: 75%;
+  height: 350px;
+  margin: auto;
+  position: relative;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}

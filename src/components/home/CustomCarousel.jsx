@@ -1,36 +1,26 @@
 import useData from "api/hooks/useData";
 import ProductCard from "../products/ProductCard";
-import "style-sheets/custom-carousel.css";
+import ProductExpansion from "components/products/product-modal/ProductExpansion";
+import ReusableModal from "components/reusable-components/ReusableModal";
+import css from "style-sheets/custom-carousel.module.css";
 
 function CustomCarousel() {
   const { data } = useData("/products");
 
   return (
     <div>
-      <h3 style={{ padding: "5px", width: "75%", margin: "auto" }}>
+      <h3 style={{ marginBottom: "5px", width: "75%", margin: "auto" }}>
         FEATURED PRODUCTS
       </h3>
-      <div
-        className="carousel"
-        style={{
-          display: "flex",
-          overflowX: "scroll",
-          scrollBehavior: "smooth",
-          width: "75%",
-          margin: "auto",
-          position: "relative",
-        }}
-      >
+      <div className={css.carousel}>
         {data?.map((product) => {
           return (
-            <div
+            <ReusableModal
+              modalSize={"xl"}
               key={product._id}
-              style={{
-                padding: "8px",
-              }}
-            >
-              <ProductCard data={product} cart={true} />
-            </div>
+              children={<ProductExpansion />}
+              trigger={<ProductCard data={product} />}
+            />
           );
         })}
       </div>

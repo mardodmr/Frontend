@@ -10,14 +10,14 @@ import {
   Button,
   HStack,
 } from "@chakra-ui/react";
-import { CgProfile } from "react-icons/cg";
+import { User } from "react-feather";
 import { Link } from "react-router-dom";
 
 function PopoverMenu() {
   return (
     <Popover isLazy={true}>
       <PopoverTrigger>
-        <IconButton icon={<CgProfile size={30} />} variant={"gohst"} />
+        <IconButton icon={<User size={30} />} variant={"gohst"} />
       </PopoverTrigger>
       <PopoverContent width={"auto"}>
         <PopoverArrow />
